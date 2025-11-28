@@ -135,9 +135,11 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
     <img width="829" height="838" alt="image" src="https://github.com/user-attachments/assets/6d52e18a-926b-45b5-b895-5edfa52041f7" />
 
-7. Select **I have MongoDB Compass installed**, copy the connection string (If you do not have MongoDB Compass installed, download it from https://downloads.mongodb.com/compass/mongodb-compass-1.48.2-darwin-arm64.dmg)
+7. Select **I have MongoDB Compass installed**, copy the connection string [Save this for later steps]
 
     <img width="829" height="856" alt="image" src="https://github.com/user-attachments/assets/de0720af-df4b-4c55-9a5f-486360f4b99b" />
+
+    **NOTE:** If you do not have MongoDB Compass installed, download it from https://downloads.mongodb.com/compass/mongodb-compass-1.48.2-darwin-arm64.dmg
 
 8. Click on **Done**
 
@@ -171,3 +173,28 @@ The Travel Memory application has been developed using the MERN stack. Below are
 ### Steps:
 
 1. Launch MongoDB Compass, click on **Add new connection**
+
+    <img width="1424" height="747" alt="image" src="https://github.com/user-attachments/assets/23dbfac0-9624-4d06-afc9-f56a054ddcc8" />
+
+2. Enter the **Connection string** copied from the previous task in the **New Connection** tab under **URI**
+
+    <img width="1921" height="1000" alt="image" src="https://github.com/user-attachments/assets/00d151c1-5abb-4b00-a283-16dca6503218" />
+
+    Replace <db_password> with your password created in previous task.
+   
+4. Click on **Save & Connect**
+5. In the **Connections** tab on Left sidebar, hover the mouse on cluster name, then click on **+** to **Create database**
+
+    <img width="329" height="272" alt="image" src="https://github.com/user-attachments/assets/abc05e04-a167-4b62-b0d1-a7d2311b8f44" />
+
+6. Enter the Database details, **Database Name, Collection Name** then click on **Create Database**
+
+    <img width="609" height="480" alt="image" src="https://github.com/user-attachments/assets/7ca63b8a-8993-494a-9062-59a6d31452be" />
+
+7. v
+8. ds
+9. v
+10. ds
+11. vds
+12. vds
+13. sd
