@@ -191,10 +191,86 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
     <img width="609" height="480" alt="image" src="https://github.com/user-attachments/assets/7ca63b8a-8993-494a-9062-59a6d31452be" />
 
-7. v
-8. ds
-9. v
-10. ds
-11. vds
-12. vds
-13. sd
+7. Save your MongoDB Connection URI, as this may require in further configuration.
+
+---
+
+## Task-5: Deploying Node.js Backend Application
+
+### Steps:
+
+1. Goto the backend EC2 instance, clone the repository `https://github.com/UnpredictablePrashant/TravelMemory.git` and verify
+
+    ```sh
+    git clone https://github.com/UnpredictablePrashant/TravelMemory.git
+    ls -la
+    ```
+    
+    <img width="651" height="317" alt="image" src="https://github.com/user-attachments/assets/94d7e4a1-615c-4200-a559-47ddbcfdb2e4" />
+    
+
+2. Goto the `backend` directory, create `.env` file and insert your MongoDB URI [Refer to the files in this repository]
+
+    ```
+    cd TravelMemory/backend/
+    nano .env
+    ```
+
+    Refer `.env` file from `backend` folder in this repository.
+
+    ```
+    
+    ```
+
+    <img width="694" height="64" alt="image" src="https://github.com/user-attachments/assets/ebfc815b-7f08-4d34-8289-9008c91b38c3" />
+    
+    Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
+
+    <img width="406" height="33" alt="image" src="https://github.com/user-attachments/assets/0382d300-c895-441c-ab96-1b6e3c6f7276" />
+
+3. Once the file is created, install necessary packages and run the Backend Application
+
+    ```sh
+    npm install
+    node index.js
+    ```
+
+    <img width="500" height="332" alt="image" src="https://github.com/user-attachments/assets/23630dc8-4329-4022-9788-4c4d41f89620" />
+    <img width="500" height="50" alt="image" src="https://github.com/user-attachments/assets/8917e098-03c1-41ee-a600-76453a45ba81" />
+
+4. Verify if the Backend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3001/hello`
+
+    <img width="1249" height="78" alt="image" src="https://github.com/user-attachments/assets/f1765ad5-63b8-45e9-af46-1c83bc0859a9" />
+
+5. Goto the `frontend` directory, create `.env` file and insert the connection to backend
+
+    ```
+    cd TravelMemory/frontend
+    nano .env
+    ```
+    <img width="355" height="19" alt="image" src="https://github.com/user-attachments/assets/42d1dc13-cb94-4de7-a1bd-4420c03e142e" />
+    <img width="399" height="19" alt="image" src="https://github.com/user-attachments/assets/3b38790b-0759-47ad-8c9b-57ebdab0d183" />
+
+    Refer `.env` file from `frontend` folder in this repository.
+
+    ```
+    REACT_APP_BACKEND_URL=http://EC2-PUBLIC-IP:3001
+    ```
+
+    <img width="361" height="38" alt="image" src="https://github.com/user-attachments/assets/3dbc61ce-1971-4e7b-9901-d6137c160f57" />
+
+    Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
+
+6. Once the file is created, install necessary packages and run the Frontend Application
+
+    ```sh
+    npm install
+    npm start
+    ```
+
+    <img width="1707" height="366" alt="image" src="https://github.com/user-attachments/assets/64f07691-06e4-4e0f-9c14-357de51f7fe0" />
+    <img width="468" height="326" alt="image" src="https://github.com/user-attachments/assets/9dba5511-255c-48f0-b6b5-ff26ade7f50d" />
+
+7. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
+
+    <img width="1366" height="117" alt="image" src="https://github.com/user-attachments/assets/5c6349e4-be6c-4e73-80d8-997689888a24" />
