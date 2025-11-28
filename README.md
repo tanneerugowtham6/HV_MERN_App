@@ -77,4 +77,97 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
 ### Steps:
 
-1. 
+1. Update and upgrade the available packages
+
+    ```sh
+    sudo apt update
+    sudo apt upgrade -y
+    ```
+
+    <img width="651" height="42" alt="image" src="https://github.com/user-attachments/assets/7e83149d-fee9-48e1-bccd-38c1c11e7894" />
+    <img width="677" height="99" alt="image" src="https://github.com/user-attachments/assets/0b2f3b7c-bbbe-47f4-ba43-1e14a557c54b" />
+    <img width="1621" height="191" alt="image" src="https://github.com/user-attachments/assets/6fb99eac-0397-4dae-878a-5a00e2eb9e6c" />
+    <img width="802" height="213" alt="image" src="https://github.com/user-attachments/assets/05c4118e-674d-4d01-a2a5-e8ba615fae09" />
+
+2. Install Node.js 22 and npm
+
+    ```sh
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    sudo apt install -y nodejs
+    ```
+
+    <img width="861" height="1043" alt="image" src="https://github.com/user-attachments/assets/99a28a40-c0f0-4ed9-9cb9-70f1013280cc" />
+    <img width="807" height="619" alt="image" src="https://github.com/user-attachments/assets/fa0e0db7-d91a-443f-b24b-75afb231e824" />
+
+3. Verify the installation using below commands
+
+    ```sh
+    node -v
+    npm -v
+    ```
+
+    <img width="255" height="83" alt="image" src="https://github.com/user-attachments/assets/f5c2032e-1f11-4b11-a918-699a798be966" />
+
+---
+
+## Task-3: Configure the MongoDB
+
+### Steps:
+
+1. Sign in to your MongoDB Atlas account (https://www.mongodb.com/cloud/atlas)
+2. Once logged in, Click on `Create a cluster`
+
+    <img width="1204" height="578" alt="image" src="https://github.com/user-attachments/assets/88a8357c-78ed-4b35-aa26-328495bbe0c6" />
+
+3. Select the required plan, since it's a demo going with a `free` plan
+
+    <img width="1419" height="483" alt="image" src="https://github.com/user-attachments/assets/09dc27b3-acd8-4c6b-a459-f9fe9df443b3" />
+
+4. Enter the required details under the **Configurations** section like, **Name, Provider, Region**
+
+    <img width="708" height="504" alt="image" src="https://github.com/user-attachments/assets/86805543-023a-476d-8fad-55609e63fe87" />
+
+5. Click on **Create Deployment**
+
+    <img width="513" height="91" alt="image" src="https://github.com/user-attachments/assets/28f40b1f-32dc-49dd-b2bd-eb19f26a4bd1" />
+
+6. Once created, Connect to <your-cluster-name> window will be popped up. Click on **Compass**
+
+    <img width="829" height="838" alt="image" src="https://github.com/user-attachments/assets/6d52e18a-926b-45b5-b895-5edfa52041f7" />
+
+7. Select **I have MongoDB Compass installed**, copy the connection string (If you do not have MongoDB Compass installed, download it from https://downloads.mongodb.com/compass/mongodb-compass-1.48.2-darwin-arm64.dmg)
+
+    <img width="829" height="856" alt="image" src="https://github.com/user-attachments/assets/de0720af-df4b-4c55-9a5f-486360f4b99b" />
+
+8. Click on **Done**
+
+9. On the left sidebar, click on **Database & Network Access**
+
+    <img width="469" height="697" alt="image" src="https://github.com/user-attachments/assets/65cb8e4e-4cb7-4c98-a8b5-bbc1e40421e8" />
+
+10. Click on **ADD NEW DATABASE USER**
+
+    <img width="1440" height="113" alt="image" src="https://github.com/user-attachments/assets/925f3321-40fd-40c0-bba3-323013dcba1b" />
+
+11. Enter a username and password
+
+    <img width="978" height="599" alt="image" src="https://github.com/user-attachments/assets/197c01f6-db9c-4226-bb8b-eaf2bf93f9c0" />
+
+12. Goto **Database User Privileges** section, under **Built-in Role**, select **Read and write to any database**. Click on **Add User**
+
+    <img width="953" height="720" alt="image" src="https://github.com/user-attachments/assets/676d6a56-996e-4b62-9eff-a5761c065813" />
+
+13. Clcik on **IP Access List** on the left sidebar. Click on **ADD IP ADDRESS**
+
+    <img width="1433" height="109" alt="image" src="https://github.com/user-attachments/assets/79fa3f63-ad1f-4760-a9df-514639826637" />
+    <img width="613" height="474" alt="image" src="https://github.com/user-attachments/assets/7b815764-4fc2-4120-b5a6-864d89727cb6" />
+
+14. Click on **Save Changes**
+
+---
+
+## Task-4: Connect to Database using MongoDB Compass
+
+### Steps:
+
+1. Launch MongoDB Compass, click on **Add new connection**
