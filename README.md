@@ -274,3 +274,10 @@ The Travel Memory application has been developed using the MERN stack. Below are
 7. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
 
     <img width="1366" height="117" alt="image" src="https://github.com/user-attachments/assets/5c6349e4-be6c-4e73-80d8-997689888a24" />
+
+---
+
+## Verify the application
+
+<img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/c4de274e-b023-4c12-b0e4-f23a96f05076" />
+<img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/dc4af0f9-e24b-4d3d-b91a-a4d0812e2607" />
