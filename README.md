@@ -300,7 +300,11 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1249" height="78" alt="image" src="https://github.com/user-attachments/assets/f1765ad5-63b8-45e9-af46-1c83bc0859a9" />
 
-5. Goto the `frontend` directory, create `.env` file and insert the connection to backend
+### Task-2: Deploying React Frontend Application
+
+#### Steps:
+
+1. Goto the `frontend` directory, create `.env` file and insert the connection to backend
 
     ```
     cd TravelMemory/frontend
@@ -319,7 +323,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
 
-6. Once the file is created, install necessary packages and run the Frontend Application
+2. Once the file is created, install necessary packages and run the Frontend Application
 
     ```sh
     npm install
@@ -329,7 +333,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="1707" height="366" alt="image" src="https://github.com/user-attachments/assets/64f07691-06e4-4e0f-9c14-357de51f7fe0" />
     <img width="468" height="326" alt="image" src="https://github.com/user-attachments/assets/9dba5511-255c-48f0-b6b5-ff26ade7f50d" />
 
-7. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
+3. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
 
     <img width="1366" height="117" alt="image" src="https://github.com/user-attachments/assets/5c6349e4-be6c-4e73-80d8-997689888a24" />
 
