@@ -348,6 +348,52 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ### Task-1: Create an AMI of the EC2 Instance
 
+#### Steps:
+
+1. Navigate to the EC2 Console, select the EC2 instance and click on **Actions** dropdown in the **Image and templates** > **Create Image**
+
+    <img width="1438" height="281" alt="image" src="https://github.com/user-attachments/assets/614f6692-c175-4826-afdf-8e0a1c3d5292" />
+
+2. Enter the **Image name** and **Image description**
+
+    <img width="1342" height="837" alt="image" src="https://github.com/user-attachments/assets/7f514a64-6128-4992-9411-2c6cfeb3b965" />
+
+3. Click on **Create image**
+4. On the left sidebar, click on AMIs and check if the AMI is created successfully and status shows **Available**
+
+    <img width="1441" height="166" alt="image" src="https://github.com/user-attachments/assets/92d23b18-2381-43ef-b8f5-24f653d46d56" />
+
+### Task-2: Create a Launch Template
+
+#### Steps:
+
+1. From the left sidebar, click on **Launch Templates** under **Instances**, click on **Create launch template**
+
+    <img width="1689" height="637" alt="image" src="https://github.com/user-attachments/assets/a7e73fcf-9de4-4fdb-bee3-bd21b5982bdb" />
+
+2. Enter the name of the **Launch template name** and **Template version description**
+
+    <img width="1138" height="411" alt="image" src="https://github.com/user-attachments/assets/3a2f2d7c-103b-4c15-ba9e-660bdf82fcd4" />
+
+3. Under the **Launch template contents** section, click on **My AMIs** and select the AMI created in previous Task.
+
+    <img width="1125" height="713" alt="image" src="https://github.com/user-attachments/assets/f054cdce-a07b-4e4d-91d1-58f47a29f309" />
+
+4. Select the **Instance type** as **t3.micro**, select previously created kerpair and Security groups under **Key pair** and **Network settings** section
+
+    <img width="1125" height="815" alt="image" src="https://github.com/user-attachments/assets/0ab86479-f4d8-42cf-956c-c04be661252e" />
+
+5. Then click on **Create launch template**
+
+    <img width="569" height="486" alt="image" src="https://github.com/user-attachments/assets/8fb93798-db43-4c9c-8cb4-fb08d600cc26" />
+
+6. Once done, navigate to the Launch templates and check for the new created template
+
+    <img width="1675" height="79" alt="image" src="https://github.com/user-attachments/assets/cc248649-b785-446c-bf21-ff783c8c1445" />
+    <img width="1441" height="154" alt="image" src="https://github.com/user-attachments/assets/0c3a74ec-e6d7-40a3-ade9-d7a1c70bee03" />
+
+
+
 ---
 
 ## Issues observed
