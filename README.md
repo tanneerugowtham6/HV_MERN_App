@@ -281,3 +281,75 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
 <img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/c4de274e-b023-4c12-b0e4-f23a96f05076" />
 <img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/dc4af0f9-e24b-4d3d-b91a-a4d0812e2607" />
+
+---
+
+## Issues observed
+
+1. Once the frontend and backend has been deployed and run, the application stops as soon as we press `ctrl+c`
+
+    This occurs because, node `index.js` and `npm start` run in the foreground of SSH session.
+    Inorder to get rid of this issue, have implemented the below solution,
+
+    ```sh
+    sudo npm install -g pm2
+    # Verify the installation of pm2
+    pm2 -v
+    ```
+
+    <img width="499" height="185" alt="image" src="https://github.com/user-attachments/assets/71199eb7-2cd6-4b74-89d4-6160851b2708" />
+    <img width="499" height="631" alt="image" src="https://github.com/user-attachments/assets/fc141913-ff65-4457-a893-9a070d7a8eb0" />
+
+    Navigate to `TravelMemory/backend` folder and run the `inedx.js` application as below,
+
+    ```sh
+    cd ~/TravelMemory/backend
+    pm2 start index.js --name travelmemory-backend
+    ```
+
+    <img width="1059" height="132" alt="image" src="https://github.com/user-attachments/assets/67208aeb-4883-4b3a-8dfb-376f78d2ac0b" />
+    
+
+    Verify if it's running (if output wasn't visible in previos step)
+
+    ```sh
+    pm2 status
+    ```
+
+    <img width="1059" height="106" alt="image" src="https://github.com/user-attachments/assets/23c6d433-bcc8-4d40-8ae3-a2527a094b0e" />
+
+    Navigate to `TravelMemory/backend` folder and run the frontend application as below,
+
+    ```sh
+    cd ~/TravelMemory/frontend
+    pm2 start npm --name travelmemory-frontend -- start
+    ```
+
+    <img width="1067" height="152" alt="image" src="https://github.com/user-attachments/assets/7397fe95-a91c-492f-9eac-6ecd9dadcbea" />
+
+    Verify if it's running (if output wasn't visible in previos step)
+
+    ```sh
+    pm2 status
+    ```
+
+    <img width="1067" height="125" alt="image" src="https://github.com/user-attachments/assets/55805e8e-2c1f-4a97-a74a-764f9f1acfbd" />
+
+    Make the pm2 to auto start these applications on reboot
+
+    ```sh
+    pm2 save
+    pm2 startup
+    ```
+
+    Once ths startup command executed, **as shown in the above screenshot**, execute the below command or copy and paste the command from the SSH session.
+
+    <img width="853" height="337" alt="image" src="https://github.com/user-attachments/assets/586b265a-f92c-429b-843d-ebe67e7f9058" />
+
+    Finally, save the pm2 processes.
+
+    ```
+    pm2 save
+    ```
+
+    
