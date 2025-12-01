@@ -431,12 +431,16 @@ Goto EC2 console, in the left sidebar click on **Elastic IPs** under **Network &
 
 Once the IP is created, 
 - Click on the IP
+
     <img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/685d8b8b-b459-43e1-9a71-40f85d3a1571" />
 - Click on **Associate Elastic IP address**
+
     <img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/89ec0918-ab11-46b8-8105-ace6cee8134b" />
 - Make sure **Resource Type** as **Instance**, then select required **Instance** and **Private IP address** of the instance
+
     <img width="1665" height="551" alt="image" src="https://github.com/user-attachments/assets/0ba4823c-9ff7-4dab-adfe-7ee89161af99" />
 - Click on **Associate**
+
     <img width="1442" height="56" alt="image" src="https://github.com/user-attachments/assets/e76e38ee-4405-4d01-a766-0ac38071a28b" />
 
 Login to the EC2 instance, restart frontend service with pm2
