@@ -1,4 +1,4 @@
-<img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/991590f5-52e1-4a74-a55e-f9d346f5016b" /># Travel Memory Application based on MERN Stack
+# Travel Memory Application based on MERN Stack
 
 ---
 
