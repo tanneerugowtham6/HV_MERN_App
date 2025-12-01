@@ -1,4 +1,4 @@
-# Travel Memory Application based on MERN Stack
+<img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/991590f5-52e1-4a74-a55e-f9d346f5016b" /># Travel Memory Application based on MERN Stack
 
 ---
 
@@ -337,81 +337,114 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1366" height="117" alt="image" src="https://github.com/user-attachments/assets/5c6349e4-be6c-4e73-80d8-997689888a24" />
 
----
-
-## Verify the application
+### Task-3: Verify the application deployment
 
 <img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/c4de274e-b023-4c12-b0e4-f23a96f05076" />
 <img width="1707" height="979" alt="image" src="https://github.com/user-attachments/assets/dc4af0f9-e24b-4d3d-b91a-a4d0812e2607" />
 
 ---
 
+## Phase 3: Scaling & Load Balancing
+
+### Task-1: Create an AMI of the EC2 Instance
+
+---
+
 ## Issues observed
 
-1. Once the frontend and backend has been deployed and run, the application stops as soon as we press `ctrl+c`
+### 1. Application Stops When Pressing `Ctrl+C` During Deployment
 
-    This occurs because, node `index.js` and `npm start` run in the foreground of SSH session.
-    Inorder to get rid of this issue, have implemented the below solution,
+Once the frontend and backend has been deployed and run, the application stops as soon as we press `ctrl+c`. This occurs because, node `index.js` and `npm start` run in the foreground of SSH session. Inorder to get rid of this issue, have implemented the below solution,
 
-    ```sh
-    sudo npm install -g pm2
-    # Verify the installation of pm2
-    pm2 -v
-    ```
+```sh
+sudo npm install -g pm2
+# Verify the installation of pm2
+pm2 -v
+```
 
-    <img width="499" height="185" alt="image" src="https://github.com/user-attachments/assets/71199eb7-2cd6-4b74-89d4-6160851b2708" />
-    <img width="499" height="631" alt="image" src="https://github.com/user-attachments/assets/fc141913-ff65-4457-a893-9a070d7a8eb0" />
+<img width="499" height="185" alt="image" src="https://github.com/user-attachments/assets/71199eb7-2cd6-4b74-89d4-6160851b2708" />
+<img width="499" height="631" alt="image" src="https://github.com/user-attachments/assets/fc141913-ff65-4457-a893-9a070d7a8eb0" />
 
-    Navigate to `TravelMemory/backend` folder and run the `inedx.js` application as below,
+Navigate to `TravelMemory/backend` folder and run the `inedx.js` application as below,
 
-    ```sh
-    cd ~/TravelMemory/backend
-    pm2 start index.js --name travelmemory-backend
-    ```
+```sh
+cd ~/TravelMemory/backend
+pm2 start index.js --name travelmemory-backend
+```
 
-    <img width="1059" height="132" alt="image" src="https://github.com/user-attachments/assets/67208aeb-4883-4b3a-8dfb-376f78d2ac0b" />
-    
+<img width="1059" height="132" alt="image" src="https://github.com/user-attachments/assets/67208aeb-4883-4b3a-8dfb-376f78d2ac0b" />
 
-    Verify if it's running (if output wasn't visible in previos step)
 
-    ```sh
-    pm2 status
-    ```
+Verify if it's running (if output wasn't visible in previos step)
 
-    <img width="1059" height="106" alt="image" src="https://github.com/user-attachments/assets/23c6d433-bcc8-4d40-8ae3-a2527a094b0e" />
+```sh
+pm2 status
+```
 
-    Navigate to `TravelMemory/backend` folder and run the frontend application as below,
+<img width="1059" height="106" alt="image" src="https://github.com/user-attachments/assets/23c6d433-bcc8-4d40-8ae3-a2527a094b0e" />
 
-    ```sh
-    cd ~/TravelMemory/frontend
-    pm2 start npm --name travelmemory-frontend -- start
-    ```
+Navigate to `TravelMemory/backend` folder and run the frontend application as below,
 
-    <img width="1067" height="152" alt="image" src="https://github.com/user-attachments/assets/7397fe95-a91c-492f-9eac-6ecd9dadcbea" />
+```sh
+cd ~/TravelMemory/frontend
+pm2 start npm --name travelmemory-frontend -- start
+```
 
-    Verify if it's running (if output wasn't visible in previos step)
+<img width="1067" height="152" alt="image" src="https://github.com/user-attachments/assets/7397fe95-a91c-492f-9eac-6ecd9dadcbea" />
 
-    ```sh
-    pm2 status
-    ```
+Verify if it's running (if output wasn't visible in previos step)
 
-    <img width="1067" height="125" alt="image" src="https://github.com/user-attachments/assets/55805e8e-2c1f-4a97-a74a-764f9f1acfbd" />
+```sh
+pm2 status
+```
 
-    Make the pm2 to auto start these applications on reboot
+<img width="1067" height="125" alt="image" src="https://github.com/user-attachments/assets/55805e8e-2c1f-4a97-a74a-764f9f1acfbd" />
 
-    ```sh
-    pm2 save
-    pm2 startup
-    ```
+Make the pm2 to auto start these applications on reboot
 
-    Once ths startup command executed, **as shown in the above screenshot**, execute the below command or copy and paste the command from the SSH session.
+```sh
+pm2 save
+pm2 startup
+```
 
-    <img width="853" height="337" alt="image" src="https://github.com/user-attachments/assets/586b265a-f92c-429b-843d-ebe67e7f9058" />
+Once ths startup command executed, **as shown in the above screenshot**, execute the below command or copy and paste the command from the SSH session.
 
-    Finally, save the pm2 processes.
+<img width="853" height="337" alt="image" src="https://github.com/user-attachments/assets/586b265a-f92c-429b-843d-ebe67e7f9058" />
 
-    ```
-    pm2 save
-    ```
+Finally, save the pm2 processes.
 
-    
+```
+pm2 save
+```
+
+### 2. Public IPv4 Address Keeps Changing After Restarting the EC2 Instance
+
+When the EC2 instance was stopped and started multiple times, the public IPv4 address changed each time. This caused deployment interruptions because:
+- The frontend .env variable (REACT_APP_BACKEND_URL) became invalid
+- Backend test URLs such as http://<IP>:3001/hello stopped working
+
+Goto EC2 console, in the left sidebar click on **Elastic IPs** under **Network & Security**
+- Click on **Allocate Elastic IP address**
+    <img width="1471" height="109" alt="image" src="https://github.com/user-attachments/assets/5aaee7ed-ed57-4ba8-828a-10a0792d5079" />
+- Click on **Allocate**
+    <img width="1667" height="676" alt="image" src="https://github.com/user-attachments/assets/7d089530-8d0d-497b-bdd8-5593c3612a27" />
+
+Once the IP is created, 
+- Click on the IP
+    <img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/685d8b8b-b459-43e1-9a71-40f85d3a1571" />
+- Click on **Associate Elastic IP address**
+    <img width="1444" height="132" alt="image" src="https://github.com/user-attachments/assets/89ec0918-ab11-46b8-8105-ace6cee8134b" />
+- Make sure **Resource Type** as **Instance**, then select required **Instance** and **Private IP address** of the instance
+    <img width="1665" height="551" alt="image" src="https://github.com/user-attachments/assets/0ba4823c-9ff7-4dab-adfe-7ee89161af99" />
+- Click on **Associate**
+    <img width="1442" height="56" alt="image" src="https://github.com/user-attachments/assets/e76e38ee-4405-4d01-a766-0ac38071a28b" />
+
+Login to the EC2 instance, restart frontend service with pm2
+
+```sh
+pm2 restart travelmemory-frontend
+```
+
+<img width="1069" height="170" alt="image" src="https://github.com/user-attachments/assets/49d4eb2b-1e7a-4849-9f43-586bc52b0b3a" />
+
+You can see the application be working fine.
