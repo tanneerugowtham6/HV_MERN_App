@@ -392,7 +392,11 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="1675" height="79" alt="image" src="https://github.com/user-attachments/assets/cc248649-b785-446c-bf21-ff783c8c1445" />
     <img width="1441" height="154" alt="image" src="https://github.com/user-attachments/assets/0c3a74ec-e6d7-40a3-ade9-d7a1c70bee03" />
 
+### Task-3: Create a Target Group for the ALB
 
+#### Steps:
+
+1. From the left sidebar, navigate to **Target Groups** under Load Balancing section
 
 ---
 
