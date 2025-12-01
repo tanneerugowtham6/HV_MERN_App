@@ -2,17 +2,81 @@
 
 ---
 
-The Travel Memory application has been developed using the MERN stack. Below are the complete steps for deploying full-stack applications, working with cloud platforms, and ensuring scalable architecture.
+The Travel Memory application is a full-stack MERN (MongoDB, Express.js, React, Node.js) project designed to store and retrieve travel experiences. As part of a cloud deployment exercise, you are responsible for deploying the complete application onto AWS using industry-standard DevOps practices.
+
+The objective is to ensure the application is fully operational, scalable, secure, and accessible over a custom domain. This involves configuring compute resources, environment variables, networking, load balancing, auto-scaling, DNS routing, and ensuring successful communication between the frontend and backend services.
+
+As a DevOps Engineer, your role is to deploy and scale this application using AWS services while adhering to cloud architecture best practices.
+
+
+---
+
+## Project Execution Overview
+
+This project is executed in **4 phases**, each containing a set of clear deployment tasks required to fully host and scale the Travel Memory MERN application on AWS.
+
+### Phases of Deployment
+- **Phase 1:** Instance Setup & Environment Preparation
+- **Phase 2:** Application Deployment (Backend + Frontend)
+- **Phase 3:** Scaling & Load Balancing
+- **Phase 4:** Domain Integration via Cloudflare
+
+---
+
+## Architecture Diagram
+
+The following diagram represents the complete AWS architecture used to deploy, scale, and route traffic for the Travel Memory MERN application.
 
 ---
 
 ## Environment
 
+### Cloud Platform
+- **Provider:** AWS EC2
+
+### Operating System
+- **OS:** Ubuntu 20.04 LTS
+
+### AWS Services Used
+- EC2
+- AMI
+- Launch Template
+- Auto Scaling Group (ASG)
+- Application Load Balancer (ALB)
+- Security Groups
+- VPC
+
+### Database
+- MongoDB Atlas
+
+### Additional Services
+- Cloudflare
+
+
+## Technology Stack
+
+### Frontend
+- React
+- JavaScript
+- npm
+
+### Backend
+- Node.js
+- Express.js
+
+### Process Management
+- PM2
+
+### Version Control
+- Git
+
 ---
 
-## Task-1: Launching an EC2 Instance for Backend Deployment
+## Phase 1: Instance Setup & Environment Preparation 
 
-### Steps:
+### Task-1: Launching an EC2 Instance for Backend Deployment
+
+#### Steps:
 
 1. Login to your AWS Account and search for EC2 service
 
@@ -46,11 +110,9 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
     <img width="689" height="220" alt="image" src="https://github.com/user-attachments/assets/d8b66802-7138-4aed-b493-f96fa19e0cee" />
 
----
+### Task-2: Connect to the EC2 Instance
 
-## Task-2: Connect to the Backend EC2 Instance
-
-### Steps:
+#### Steps:
 
 1. Go to the EC2 Instance and copy Public IPv4 or Public DNS
 2. Launch the Terminal (macOS), Command Prompt (Windows)
@@ -71,11 +133,9 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
     <img width="888" height="641" alt="image" src="https://github.com/user-attachments/assets/65770b11-f593-4465-af67-3b6d95118c30" />
 
----
+### Task-3: Configure the EC2 Instance
 
-## Task-3: Configure the Backend EC2 Instance
-
-### Steps:
+#### Steps:
 
 1. Update and upgrade the available packages
 
@@ -108,11 +168,9 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
     <img width="255" height="83" alt="image" src="https://github.com/user-attachments/assets/f5c2032e-1f11-4b11-a918-699a798be966" />
 
----
+### Task-4: Configure the MongoDB
 
-## Task-3: Configure the MongoDB
-
-### Steps:
+#### Steps:
 
 1. Sign in to your MongoDB Atlas account (https://www.mongodb.com/cloud/atlas)
 2. Once logged in, Click on `Create a cluster`
@@ -166,11 +224,9 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
 14. Click on **Save Changes**
 
----
+### Task-5: Connect to Database using MongoDB Compass
 
-## Task-4: Connect to Database using MongoDB Compass
-
-### Steps:
+#### Steps:
 
 1. Launch MongoDB Compass, click on **Add new connection**
 
@@ -195,9 +251,11 @@ The Travel Memory application has been developed using the MERN stack. Below are
 
 ---
 
-## Task-5: Deploying Node.js Backend Application
+## Phase-2: Application Deployment (Backend + Frontend)
 
-### Steps:
+### Task-1: Deploying Node.js Backend Application
+
+#### Steps:
 
 1. Goto the backend EC2 instance, clone the repository `https://github.com/UnpredictablePrashant/TravelMemory.git` and verify
 
