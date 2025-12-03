@@ -396,7 +396,84 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 #### Steps:
 
-1. From the left sidebar, navigate to **Target Groups** under Load Balancing section
+1. From the left sidebar, navigate to **Target Groups** under **Load Balancing** section
+2. Click on **Create target group**
+
+    <img width="1692" height="969" alt="image" src="https://github.com/user-attachments/assets/0a19173b-b64b-4a6c-b102-1dcadc18f1bd" />
+
+3. On the **Create target group** page, under **settings** section select 
+    **Target type:** Instances
+    **Target group name:** tmmernapp-tg
+    **Protocol:** HTTP
+    **Port:** 3000
+
+    <img width="1067" height="678" alt="image" src="https://github.com/user-attachments/assets/31071ab2-2f87-4e87-82dd-24df21aacbdc" />
+
+4. Select the **VPC** same as your instance and leave the remaining values to default
+
+    <img width="1123" height="159" alt="image" src="https://github.com/user-attachments/assets/64978124-8ddc-4fa8-8e8f-af7af8110e94" />
+
+5. Click on **Next**
+6. Under the **Register targets** section, select the Instance where the application has been hosted and click on **Include as pending below** (Repeat this step if you have multiple instances)
+
+    <img width="1399" height="516" alt="image" src="https://github.com/user-attachments/assets/953247f0-24dd-43f9-a1e1-ecdf110c3877" />
+
+7. Now you can see the targets added under **Review targets**, then click on **Next**
+
+    <img width="1399" height="331" alt="image" src="https://github.com/user-attachments/assets/0d5fce18-8a85-41d2-b5b5-ad9521a65f07" />
+
+8. Click on **Create target group**
+
+    <img width="1399" height="331" alt="image" src="https://github.com/user-attachments/assets/44415dd9-1d20-433b-a50a-4513fe17e4e1" />
+    <img width="1435" height="165" alt="image" src="https://github.com/user-attachments/assets/bce3285d-bcfb-4eb4-aa68-2c3267001299" />
+
+### Task-4: Create a Load Balancer (ALB)
+
+#### Steps:
+
+1. On the left sidebar, click on **Load balancers** under **Load balancing** section, click on **Create load balancer**
+
+    <img width="1697" height="832" alt="image" src="https://github.com/user-attachments/assets/ff1ad8ef-db36-4d6e-8bf6-14ff8bb17260" />
+
+2. Click on **Create** under **Application Load Balancer**
+
+    <img width="1022" height="832" alt="image" src="https://github.com/user-attachments/assets/e0780fe4-3b8f-4da3-ac5b-add6c2f3368e" />
+
+3. Enter **Load balancer name** and select **Internet-facing** scheme
+
+    <img width="1646" height="495" alt="image" src="https://github.com/user-attachments/assets/600e7e92-0216-4082-8a7d-acb8578213cb" />
+
+4. Under **Network mapping** section, select the VPC same as your instance and select 2 public subnets in different availability zones
+
+    <img width="1646" height="630" alt="image" src="https://github.com/user-attachments/assets/36f6f827-458d-424a-a3c4-25bbe4e8d4b9" />
+
+5. Under the **Security groups** section, select the same Security group used by the Instance
+
+    <img width="1171" height="227" alt="image" src="https://github.com/user-attachments/assets/12aec935-9dcd-43fc-b91d-ce526afdb060" />
+
+6. Under **Listeners & routing** section, set the parameters as below
+
+    **Listener:**  
+           Protocol: HTTP  
+           Port: 80  
+    **Default action:**  
+        Routing action: Forward to target groups  
+            Target group: Select the target group created in previous task  
+    Leave the remaining values to default
+
+    <img width="1474" height="820" alt="image" src="https://github.com/user-attachments/assets/7bee52d9-e2ef-455b-88ce-ea03dd233f59" />
+
+8. Scroll down and click on **Create load balancer**
+
+    <img width="269" height="66" alt="image" src="https://github.com/user-attachments/assets/1c38a310-4c41-4a1c-a2fb-6c6307b635b2" />
+
+9. Wait till the Load balacer status become **Active**
+
+    <img width="1710" height="939" alt="image" src="https://github.com/user-attachments/assets/8f00b9c8-d477-45ad-b153-59ac7acbcc31" />
+
+### Task-5: Create ASG
+
+#### Steps:
 
 ---
 
