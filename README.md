@@ -483,11 +483,40 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="397" height="191" alt="image" src="https://github.com/user-attachments/assets/0fd41c6c-1964-424b-b654-1e9b048f97d6" />
 
-3. dfv
-4. sfd
-5. v
-6. sdf
+3. Enter **Auto Scaling group name**
 
+    <img width="1446" height="330" alt="image" src="https://github.com/user-attachments/assets/79adaa87-a3d3-42df-9315-22f324549c76" />
+
+4. Select the **Launch template** which was created in the previous task and select the **Default** version
+
+    <img width="1371" height="752" alt="image" src="https://github.com/user-attachments/assets/a5fa4974-b33a-41c0-9473-1489dd975958" />
+
+5. Click on **Next**
+6. Leave **Instance type requirements** to defaults
+7. Under the Networking section, select the VPC same as your instance and select 2 public subnets in different availability zones. Click on **Next**
+
+    <img width="1371" height="701" alt="image" src="https://github.com/user-attachments/assets/8204d5d0-0531-432f-8b53-64f4ebe2b897" />
+
+8. Under **Load balancing options**, select **Attach to an existing load balancer** and **Choose from your load balancer target groups**, then select the target group created in previous task
+
+    <img width="1371" height="505" alt="image" src="https://github.com/user-attachments/assets/22b9f9e9-4043-47a7-9ac3-683f9dc80265" />
+
+9. Leave the remaining to defaults and click on **Next**
+10. Under **Group size** section, enter **Desire capacity** as **3**
+
+    <img width="1371" height="351" alt="image" src="https://github.com/user-attachments/assets/8e2078f9-8f98-47b3-8cd2-895ba8953e9f" />
+
+11. Under **Scaling** section, enter **Min desired capacity** to **1**, **Max desired capacity** to **3**
+12. In **Automatic scaling** section, select **Target tracking scaling policy**, set **Metric type** to **Average CPU utilization** and **Target value** to **75**
+
+    <img width="1371" height="762" alt="image" src="https://github.com/user-attachments/assets/4cbc57aa-e82c-4d40-a226-6af5531f6001" />
+
+13. Leave the remaining settings to default and click **Next** until you reach **Review** page
+14. Review all the details, scroll down to the bottom and click on **Create Auto Scaling group**
+
+    <img width="428" height="77" alt="image" src="https://github.com/user-attachments/assets/3779a7ed-e234-4f5c-9525-bdcedd8360aa" />
+
+15. Wait for the status to be updated to **Ready**
 ---
 
 ## Issues observed
