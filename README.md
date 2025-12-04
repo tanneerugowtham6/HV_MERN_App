@@ -431,7 +431,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 #### Steps:
 
-1. On the left sidebar, click on **Load balancers** under **Load balancing** section, click on **Create load balancer**
+1. From the left sidebar, click on **Load balancers** under **Load balancing** section, click on **Create load balancer**
 
     <img width="1697" height="832" alt="image" src="https://github.com/user-attachments/assets/ff1ad8ef-db36-4d6e-8bf6-14ff8bb17260" />
 
@@ -471,9 +471,22 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1710" height="939" alt="image" src="https://github.com/user-attachments/assets/8f00b9c8-d477-45ad-b153-59ac7acbcc31" />
 
-### Task-5: Create ASG
+### Task-5: Create Auto Scaling Group (ASG)
 
 #### Steps:
+
+1. From the left sidebar, click on **Auto Scaling Groups** under **Auto Scaling** section
+
+    <img width="1483" height="820" alt="image" src="https://github.com/user-attachments/assets/81a393c1-86f1-4066-a7b0-8c6f1e2d9dd2" />
+
+2. Click on **Create Auto Scaling group**
+
+    <img width="397" height="191" alt="image" src="https://github.com/user-attachments/assets/0fd41c6c-1964-424b-b654-1e9b048f97d6" />
+
+3. dfv
+4. sfd
+5. v
+6. sdf
 
 ---
 
