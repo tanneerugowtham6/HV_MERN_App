@@ -531,6 +531,55 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ---
 
+## Phase 4: Domain Integration via Cloudflare  
+
+### Task-1: Create Cloudflare DNS records
+
+**Pre-requisites**
+
+- Domain (gowthamtanneeru.online)
+- ALB DNS Name: tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com
+
+#### Steps:
+
+1. Login to your Cloud flare account
+
+    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/4a3be70a-676b-411c-a182-a10fb7cd5c75" />
+
+2. Click on the domain name, which navigates to the configuration page as below
+
+    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/e23fee4c-9305-4b21-8f5e-653f6f891440" />
+
+3. From the left sidebar, expand **DNS** and click on **Records**, then click on **Add record**
+
+    <img width="1283" height="310" alt="image" src="https://github.com/user-attachments/assets/558f899c-e8ea-4e84-952c-3e3bff574921" />
+
+4. Add below Records one at a time and click on **Save**
+
+    **Type:** CNAME
+    **Name:** www
+    **Target:** tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com
+    **Proxy status:** Disabled
+
+    <img width="1228" height="411" alt="image" src="https://github.com/user-attachments/assets/a3671f1c-2d14-4417-a6ff-2a1ccad7cc05" />
+
+    **Type:** A
+    **Name:** @
+    **Target:** Public_IP of Instance (Elastic IP)
+    **Proxy status:** Disabled
+
+    <img width="1228" height="411" alt="image" src="https://github.com/user-attachments/assets/bcf972dc-4507-4305-8417-8ebbf02e1567" />
+
+6. Verify the if the records created
+
+    <img width="1276" height="349" alt="image" src="https://github.com/user-attachments/assets/c30d562d-63a7-4980-a9ea-e87dd6f688e2" />
+
+7. Validate the domain by visiting `http://www.gowthamtanneeru.online` or `http://gowthamtanneeru.online`
+
+    <img width="1500" height="513" alt="image" src="https://github.com/user-attachments/assets/825075c0-b4d6-4a78-b4e8-8cd118b0efb4" />
+
+---
+
 ## Issues observed
 
 ### 1. Application Stops When Pressing `Ctrl+C` During Deployment
