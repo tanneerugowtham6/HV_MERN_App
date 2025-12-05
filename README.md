@@ -516,7 +516,18 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="428" height="77" alt="image" src="https://github.com/user-attachments/assets/3779a7ed-e234-4f5c-9525-bdcedd8360aa" />
 
-15. Wait for the status to be updated to **Ready**
+15. Verify that ASG has created
+
+    <img width="1435" height="162" alt="image" src="https://github.com/user-attachments/assets/e1262f6d-7ad5-4109-9dc9-65951962ae54" />
+
+### Task-6: Verify the Load distribution
+
+#### Steps:
+
+1. Navigate to **Traget groups** under **Load balancing** section
+2. Select the **Target group**, navigate to **Targets** section in the bottom and verify all the targets are **Healthy**
+
+    <img width="1457" height="681" alt="image" src="https://github.com/user-attachments/assets/61244e43-d0e1-401a-a1e2-0f0077e07bcf" />
 
 ---
 
