@@ -502,9 +502,9 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="1371" height="505" alt="image" src="https://github.com/user-attachments/assets/22b9f9e9-4043-47a7-9ac3-683f9dc80265" />
 
 9. Leave the remaining to defaults and click on **Next**
-10. Under **Group size** section, enter **Desire capacity** as **3**
+10. Under **Group size** section, enter **Desire capacity** as **1**
 
-    <img width="1371" height="351" alt="image" src="https://github.com/user-attachments/assets/8e2078f9-8f98-47b3-8cd2-895ba8953e9f" />
+    <img width="1352" height="274" alt="image" src="https://github.com/user-attachments/assets/0c634881-0633-42ef-bc2a-acc1b1e35fea" />
 
 11. Under **Scaling** section, enter **Min desired capacity** to **1**, **Max desired capacity** to **3**
 12. In **Automatic scaling** section, select **Target tracking scaling policy**, set **Metric type** to **Average CPU utilization** and **Target value** to **75**
@@ -517,6 +517,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="428" height="77" alt="image" src="https://github.com/user-attachments/assets/3779a7ed-e234-4f5c-9525-bdcedd8360aa" />
 
 15. Wait for the status to be updated to **Ready**
+
 ---
 
 ## Issues observed
