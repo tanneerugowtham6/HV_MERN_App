@@ -366,7 +366,89 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ---
 
-## Phase 3: Scaling & Load Balancing
+## Phase 3: Frontend SSL Preparation
+
+### Task-1: Install Nginx and configure reverse-proxy
+
+#### Steps:
+
+1. Login to the Frontend server and execute below commands
+
+    ```sh
+    sudo apt update
+    sudo apt install nginx -y
+    ```
+
+    <img width="862" height="250" alt="image" src="https://github.com/user-attachments/assets/a8d37621-bc11-4e56-88e8-b886d92ff43f" />
+
+2. Take the backup of current configuration file
+
+    ```sh
+    sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak.$(date +%F_%T)
+    ```
+
+    <img width="874" height="18" alt="image" src="https://github.com/user-attachments/assets/14712eee-f5fd-4554-bf74-2da51b937288" />
+
+3. Update the location field as with below script in configuration file
+
+    ```sh
+    sudo nano /etc/nginx/sites-available/default
+    ```
+
+    <img width="515" height="17" alt="image" src="https://github.com/user-attachments/assets/b854895f-d3ce-4ea1-a956-fff5f6e8ed35" />
+
+    ```
+    location / {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+    ```
+    
+    <img width="629" height="982" alt="image" src="https://github.com/user-attachments/assets/d33420d8-9dbc-4b83-a241-402370ce64f3" />
+
+    Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
+
+4. Restart the Nginx service
+
+    ```sh
+    sudo systemctl restart nginx
+    ```
+
+    <img width="404" height="16" alt="image" src="https://github.com/user-attachments/assets/ebb64ae8-3709-4a78-adef-189134ad56e9" />
+
+### Task-2: Install SSL using certbot
+
+#### Steps:
+
+1. After the nginx configuration file has been updated, execute the below commands
+
+    ```sh
+    sudo apt install certbot python3-certbot-nginx
+    ```
+
+    <img width="1050" height="427" alt="image" src="https://github.com/user-attachments/assets/e28c33a3-8c2f-40fb-94bd-5b516365258a" />
+
+2. Once certbot has been installed, get the certificates using the below command
+
+    ```sh
+    sudo certbot --nginx -d gowthamtanneeru.online -d www.gowthamtanneeru.online
+    ```
+    
+3. Once Certificates has been issued, verify the application
+
+    <img width="891" height="339" alt="image" src="https://github.com/user-attachments/assets/ff8df0c5-4130-445c-a144-0a89bcc42f40" />
+
+**Make sure the A Records for both <YOUR-DOMAIN> and www.<YOUR-DOMAIN> exists and points to Frontend instance Public IP in Cloudflare for now. You can refer to the steps Phase-5**
+
+---
+
+## Phase 4: Scaling & Load Balancing
 
 ### Task-1: Create an AMI of the EC2 Instance
 
@@ -553,7 +635,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ---
 
-## Phase 4: Domain Integration via Cloudflare  
+## Phase 5: Domain Integration via Cloudflare  
 
 ### Task-1: Create Cloudflare DNS records
 
