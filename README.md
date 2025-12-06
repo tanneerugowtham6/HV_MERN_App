@@ -20,6 +20,7 @@ This project is executed in **4 phases**, each containing a set of clear deploym
 - **Phase 2:** Application Deployment (Backend + Frontend)
 - **Phase 3:** Scaling & Load Balancing
 - **Phase 4:** Domain Integration via Cloudflare
+- **Phase 5:** Enable HTTPS with Cloudflare Origin CA and Nginx Reverse Proxy
 
 ---
 
@@ -578,6 +579,108 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1500" height="513" alt="image" src="https://github.com/user-attachments/assets/825075c0-b4d6-4a78-b4e8-8cd118b0efb4" />
 
+---
+
+## Phase 5: Enable HTTPS with Cloudflare Origin CA and Nginx Reverse Proxy  
+
+### Task-1: Generate Cloudflare Origin CA Certificate
+
+#### Steps:
+
+1. Navigate to the **Cloudflare Dashboard**
+2. Form the Left sidebar, click on **Origin Server** under **SSL/TLS** section, click on **Create Certificate**
+
+    <img width="1710" height="983" alt="image" src="https://github.com/user-attachments/assets/fb8fe5d2-1234-4481-b847-63fccdfc3293" />
+
+3. By default all the details are pre-filled, if not enter the details as below
+
+    **Private key type:** RSA  
+    **Hostnames:** `yourdomain` & `*.yourdomain`  
+    
+    <img width="1058" height="744" alt="image" src="https://github.com/user-attachments/assets/a8ad5f80-586e-47f9-a21a-8ff6891a10e5" />
+
+4. Click on Create
+5. After the certifates are successfully created, Cloudflare provides two .pem files [Origin Certificate, Private Key]
+6. Save them locally as `origin.pem` and `origin.key`
+7. Click on **OK**
+
+    <img width="963" height="731" alt="image" src="https://github.com/user-attachments/assets/c8c34f8e-0c7b-4303-b7d3-f5bff84b91b3" />
+
+### Task-2: Upload certificate files to EC2 using SCP
+
+#### Steps:
+
+1. From your local machine copy the files the server
+
+    ```sh
+    scp -i <PATH_TO_PEM_KEY> <PATH_TO_PEM>/origin.pem <EC2_USER>@<EC2_PUBLIC_IP>:/home/<EC2_USER>/
+    scp -i <PATH_TO_PEM_KEY> <PATH_TO_KEY>/origin.key <EC2_USER>@<EC2_PUBLIC_IP>:/home/<EC2_USER>/
+    ```
+
+    - <PATH_TO_PEM> → location where you saved origin.pem
+    - <PATH_TO_KEY> → location where you saved origin.key
+    - <EC2_USER> → ubuntu if you're using ubuntu image
+    - <EC2_PUBLIC_IP> → Elastic IP of your EC2 instance
+    - <PATH_TO_PEM_KEY> → Your EC2 Instance private key (You must have executable permissions for this)
+
+    <img width="1710" height="107" alt="image" src="https://github.com/user-attachments/assets/ed6c74a4-c589-49f6-a8b0-32226442bc96" />
+
+### Task-3: Install Origin CA Certificate on EC2
+
+#### Steps:
+
+1. Move the cert files to system paths
+
+    ```sh
+    sudo mv origin.pem /etc/ssl/certs/
+    sudo mv origin.key /etc/ssl/private/
+    ```
+
+    <img width="437" height="32" alt="image" src="https://github.com/user-attachments/assets/1eed53e9-bd18-4740-b7b4-c09fec6f3e43" />
+
+2. Assign permissions to both teh files
+
+    ```sh
+    sudo chmod 644 /etc/ssl/certs/origin.pem
+    sudo chmod 600 /etc/ssl/private/origin.key
+    ```
+
+    <img width="481" height="46" alt="image" src="https://github.com/user-attachments/assets/83d93649-a4cd-4272-bfba-e8431c90fe09" />
+
+3. Assign the owenrship to the files
+
+    ```sh
+    sudo chown root:root /etc/ssl/certs/origin.pem
+    sudo chown root:root /etc/ssl/private/origin.key
+    ```
+
+    <img width="525" height="46" alt="image" src="https://github.com/user-attachments/assets/af608557-852e-421d-a806-61d62b286d6a" />
+
+4. Verify the permissions have been set correctly
+
+    ```sh
+    sudo ls -l /etc/ssl/certs/origin.pem
+    sudo ls -l /etc/ssl/private/origin.key
+    ```
+
+    <img width="525" height="75" alt="image" src="https://github.com/user-attachments/assets/1c756180-4e0c-497d-abce-3a8cc8e32cfd" />
+
+### Task-4: Configure Nginx for SSL + Reverse Proxy
+
+#### Steps:
+
+1. Install nginx on the EC2 instance
+
+    ```sh
+    sudo apt install nginx -y
+    ```
+
+    <img width="872" height="631" alt="image" src="https://github.com/user-attachments/assets/3a75cc1c-0f67-4bfd-b77a-ffb4dde45b58" />
+
+2. sd
+3. v
+4. sd
+5. d s
 ---
 
 ## Issues observed
