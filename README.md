@@ -75,7 +75,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ## Phase 1: Instance Setup & Environment Preparation 
 
-### Task-1: Launching an EC2 Instance for Backend Deployment
+### Task-1: Launching EC2 Instance for frontend and Backend Deployment
 
 #### Steps:
 
@@ -95,11 +95,11 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="555" height="529" alt="image" src="https://github.com/user-attachments/assets/85ca4ac6-9f31-47ae-929a-ec4502f56cad" />
 
-5. Under Networks Settings, click on `edit`. Select the required VPC and a Public Subnet. Make sure **Auto-assign Public IP** is set to `Enable`
+5. Under Networks Settings, click on `edit`. Select the required VPC and a Public Subnet
 
     <img width="819" height="270" alt="image" src="https://github.com/user-attachments/assets/1863c06c-f5c2-4173-9bda-7bd72c3a1a2b" />
 
-6. Under the **Firewall (security groups)**, select **Create security group**. Enter the required details, **Security group name, Description**
+6. Under the **Firewall (security groups)**, select **Create security group**. Enter the required details, **Security group name, Description** or use the existing **Securtiy group** with the required **Inbound rules**
 
     <img width="940" height="250" alt="image" src="https://github.com/user-attachments/assets/2491830e-cf70-4a69-baef-17e558aac9c7" />
 
@@ -111,13 +111,18 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="689" height="220" alt="image" src="https://github.com/user-attachments/assets/d8b66802-7138-4aed-b493-f96fa19e0cee" />
 
+9. Repeat the steps 2 to 8 to create another EC2 instance for frontend. After the second instance is created check the status of the instances in instances page
+
+     <img width="1463" height="171" alt="image" src="https://github.com/user-attachments/assets/0f8bcb6a-2cce-4a4a-a301-437830a7578c" />
+
 ### Task-2: Connect to the EC2 Instance
 
 #### Steps:
 
-1. Go to the EC2 Instance and copy Public IPv4 or Public DNS
-2. Launch the Terminal (macOS), Command Prompt (Windows)
-3. Navigate to the folder where your `.pem` file is downloaded and assign the executable permissions to the file
+1. Assign **Elastic IPs** for both Frontend and Backend instances, as shown in the **Issue #2** in **Issues Observed** section below
+2. Go to the EC2 Instance and copy Public IPv4 or Public DNS
+3. Launch the Terminal (macOS), Command Prompt (Windows)
+4. Navigate to the folder where your `.pem` file is downloaded and assign the executable permissions to the file
 
     ```sh
     cd <.pem_file_location>
@@ -126,7 +131,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="556" height="54" alt="image" src="https://github.com/user-attachments/assets/64152aa6-2cf3-47e7-afad-c96441136769" />
 
-4. Connect to the Backend EC2 Instance using the `ssh` command
+5. Connect to both Frontend and Backend EC2 Instance using the `ssh` command
 
     ```sh
     ssh -i "<.pem_file_name>" <username>@<public_dns or ipv4 of the instance>
@@ -134,7 +139,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="888" height="641" alt="image" src="https://github.com/user-attachments/assets/65770b11-f593-4465-af67-3b6d95118c30" />
 
-### Task-3: Configure the EC2 Instance
+### Task-3: Configure the EC2 Instances
 
 #### Steps:
 
@@ -150,7 +155,22 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="1621" height="191" alt="image" src="https://github.com/user-attachments/assets/6fb99eac-0397-4dae-878a-5a00e2eb9e6c" />
     <img width="802" height="213" alt="image" src="https://github.com/user-attachments/assets/05c4118e-674d-4d01-a2a5-e8ba615fae09" />
 
-2. Install Node.js 22 and npm
+2. Set hostnames for both Frontend and Backend servers
+
+    ```sh
+    sudo hostnamectl set-hostname tmmernapp-be-001 << Backend Instance
+    sudo hostnamectl set-hostname tmmernapp-be-001 << Frontend Instance
+    ```
+
+    <img width="503" height="33" alt="image" src="https://github.com/user-attachments/assets/966dd033-e88d-445f-836e-2f75d1ac375d" />
+    <img width="503" height="18" alt="image" src="https://github.com/user-attachments/assets/cefb7de5-a464-4a34-b7f6-60b43470a137" />
+
+3. Exit the sessions and log back in for hostname changes to reflect
+
+    <img width="503" height="79" alt="image" src="https://github.com/user-attachments/assets/6cf75763-67c2-456e-be51-ba2f5850e368" />
+    <img width="224" height="22" alt="image" src="https://github.com/user-attachments/assets/a9f3ebac-bf04-4312-bb02-5dff86c86185" />
+
+4. Install Node.js 22 and npm
 
     ```sh
     curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
@@ -160,7 +180,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="861" height="1043" alt="image" src="https://github.com/user-attachments/assets/99a28a40-c0f0-4ed9-9cb9-70f1013280cc" />
     <img width="807" height="619" alt="image" src="https://github.com/user-attachments/assets/fa0e0db7-d91a-443f-b24b-75afb231e824" />
 
-3. Verify the installation using below commands
+5. Verify the installation using below commands
 
     ```sh
     node -v
@@ -254,7 +274,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ## Phase-2: Application Deployment (Backend + Frontend)
 
-### Task-1: Deploying Node.js Backend Application
+### Task-1: Deploying Node.js Backend Application on Backend Instance
 
 #### Steps:
 
@@ -277,10 +297,6 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     Refer `.env` file from `backend` folder in this repository.
 
-    ```
-    
-    ```
-
     <img width="694" height="64" alt="image" src="https://github.com/user-attachments/assets/ebfc815b-7f08-4d34-8289-9008c91b38c3" />
     
     Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
@@ -301,11 +317,20 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1249" height="78" alt="image" src="https://github.com/user-attachments/assets/f1765ad5-63b8-45e9-af46-1c83bc0859a9" />
 
-### Task-2: Deploying React Frontend Application
+### Task-2: Deploying React Frontend Application on Frontend Instance
 
 #### Steps:
 
-1. Goto the `frontend` directory, create `.env` file and insert the connection to backend
+1. Goto the frontend EC2 instance, clone the repository `https://github.com/UnpredictablePrashant/TravelMemory.git` and verify
+
+    ```sh
+    git clone https://github.com/UnpredictablePrashant/TravelMemory.git
+    ls -la
+    ```
+    
+    <img width="651" height="317" alt="image" src="https://github.com/user-attachments/assets/94d7e4a1-615c-4200-a559-47ddbcfdb2e4" />
+    
+2. Goto the `frontend` directory, create `.env` file and insert the connection to backend
 
     ```
     cd TravelMemory/frontend
@@ -316,15 +341,11 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     Refer `.env` file from `frontend` folder in this repository.
 
-    ```
-    REACT_APP_BACKEND_URL=http://EC2-PUBLIC-IP:3001
-    ```
-
     <img width="361" height="38" alt="image" src="https://github.com/user-attachments/assets/3dbc61ce-1971-4e7b-9901-d6137c160f57" />
 
     Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
 
-2. Once the file is created, install necessary packages and run the Frontend Application
+3. Once the file is created, install necessary packages and run the Frontend Application
 
     ```sh
     npm install
@@ -334,7 +355,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
     <img width="1707" height="366" alt="image" src="https://github.com/user-attachments/assets/64f07691-06e4-4e0f-9c14-357de51f7fe0" />
     <img width="468" height="326" alt="image" src="https://github.com/user-attachments/assets/9dba5511-255c-48f0-b6b5-ff26ade7f50d" />
 
-3. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
+4. Verify if the Frontend Application is running, using the browser `http://<EC2-PUBLIC-IP>:3000`
 
     <img width="1366" height="117" alt="image" src="https://github.com/user-attachments/assets/5c6349e4-be6c-4e73-80d8-997689888a24" />
 
@@ -689,6 +710,8 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 Once the frontend and backend has been deployed and run, the application stops as soon as we press `ctrl+c`. This occurs because, node `index.js` and `npm start` run in the foreground of SSH session. Inorder to get rid of this issue, have implemented the below solution,
 
+Install pm2 on both Frontend and Backend Instances
+
 ```sh
 sudo npm install -g pm2
 # Verify the installation of pm2
@@ -698,7 +721,7 @@ pm2 -v
 <img width="499" height="185" alt="image" src="https://github.com/user-attachments/assets/71199eb7-2cd6-4b74-89d4-6160851b2708" />
 <img width="499" height="631" alt="image" src="https://github.com/user-attachments/assets/fc141913-ff65-4457-a893-9a070d7a8eb0" />
 
-Navigate to `TravelMemory/backend` folder and run the `inedx.js` application as below,
+Navigate to `TravelMemory/backend` folder  on Backend Instance and run the `inedx.js` application as below,
 
 ```sh
 cd ~/TravelMemory/backend
@@ -716,7 +739,7 @@ pm2 status
 
 <img width="1059" height="106" alt="image" src="https://github.com/user-attachments/assets/23c6d433-bcc8-4d40-8ae3-a2527a094b0e" />
 
-Navigate to `TravelMemory/backend` folder and run the frontend application as below,
+Navigate to `TravelMemory/backend` folder on Frontend Instance and run the frontend application as below,
 
 ```sh
 cd ~/TravelMemory/frontend
@@ -733,7 +756,7 @@ pm2 status
 
 <img width="1067" height="125" alt="image" src="https://github.com/user-attachments/assets/55805e8e-2c1f-4a97-a74a-764f9f1acfbd" />
 
-Make the pm2 to auto start these applications on reboot
+Make the pm2 to auto start these applications on reboot on both Frontend and Backend Instances
 
 ```sh
 pm2 save
