@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-12-06T00:00:00.000Z" agent="5.0 (draw.io)" etag="travelmemory-full-v3" version="20.1.1" type="device">
+  <diagram name="TravelMemory Architecture - Full">
+    <mxGraphModel dx="1600" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1080" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Users -->
+        <mxCell id="users" value="Users (Browser)" style="ellipse;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#111827;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="160" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloudflare -->
+        <mxCell id="cloudflare" value="Cloudflare&#xa;(DNS, CDN)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f59e0b;strokeColor=#b36b00;fontSize=12;fontColor=#000000" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="180" height="64" as="geometry"/>
+        </mxCell>
+
+        <!-- ALB -->
+        <mxCell id="alb" value="Application Load Balancer&#xa;(internet-facing)&#xa;tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3b82f6;strokeColor=#1e3a8a;fontSize=11;fontColor=#ffffff" vertex="1" parent="1">
+          <mxGeometry x="480" y="32" width="520" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Target Group label -->
+        <mxCell id="tg_label" value="Target Group: travelmemory-tg&#xa;Health check: /hello" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e6f0ff;strokeColor=#3b82f6;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="640" y="120" width="260" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- ASG container -->
+        <mxCell id="asg_container" value="Auto Scaling Group&#xa;(travelmemory-asg)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#374151;fontSize=12" vertex="1" parent="1">
+          <mxGeometry x="440" y="180" width="960" height="420" as="geometry"/>
+        </mxCell>
+
+        <!-- EC2 instance 1 -->
+        <mxCell id="ec2_1" value="EC2 Instance&#xa;(i-xxxxxxxx)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fb923c;strokeColor=#c2410c;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="480" y="220" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="ec2_1_text" value="Nginx (reverse proxy)&#xa;PM2&#xa;React (3000)&#xa;Node (3001)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="ec2_1">
+          <mxGeometry x="0" y="0" width="260" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- EC2 instance 2 -->
+        <mxCell id="ec2_2" value="EC2 Instance&#xa;(i-xxxxxxxx)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fb923c;strokeColor=#c2410c;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="800" y="220" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="ec2_2_text" value="Nginx (reverse proxy)&#xa;PM2&#xa;React (3000)&#xa;Node (3001)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="ec2_2">
+          <mxGeometry x="0" y="0" width="260" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- EC2 instance 3 -->
+        <mxCell id="ec2_3" value="EC2 Instance&#xa;(i-xxxxxxxx)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fb923c;strokeColor=#c2410c;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="1120" y="220" width="260" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="ec2_3_text" value="Nginx (reverse proxy)&#xa;PM2&#xa;React (3000)&#xa;Node (3001)" style="text;html=1;align=center;verticalAlign=middle;fontSize=11" vertex="1" parent="ec2_3">
+          <mxGeometry x="0" y="0" width="260" height="160" as="geometry"/>
+        </mxCell>
+
+        <!-- MongoDB Atlas -->
+        <mxCell id="mongodb" value="MongoDB Atlas&#xa;(tmcluster001)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#16a34a;strokeColor=#14532d;fontSize=12;fontColor=#ffffff" vertex="1" parent="1">
+          <mxGeometry x="1420" y="240" width="260" height="120" as="geometry"/>
+        </mxCell>
+
+        <!-- AMI / Launch Template -->
+        <mxCell id="ami" value="AMI: ami-07c14add6c1bc8599&#xa;Launch Template: lt-026d74058e68ee5c1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f3f4f6;strokeColor=#6b7280;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="760" y="540" width="420" height="76" as="geometry"/>
+        </mxCell>
+
+        <!-- VPC / Security Groups boundary (visual) -->
+        <mxCell id="vpc" value="VPC • Security Groups" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9ca3af;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="420" y="168" width="1000" height="456" as="geometry"/>
+        </mxCell>
+
+        <!-- Monitoring / Logs -->
+        <mxCell id="monitor" value="Monitoring / Logs&#xa;CloudWatch & PM2 logs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#eef2ff;strokeColor=#6366f1;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="1420" y="380" width="260" height="86" as="geometry"/>
+        </mxCell>
+
+        <!-- Optional: S3 + CloudFront -->
+        <mxCell id="s3" value="(Optional) S3 + CloudFront" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#9ca3af;dashed=1;fontSize=11" vertex="1" parent="1">
+          <mxGeometry x="1420" y="480" width="260" height="76" as="geometry"/>
+        </mxCell>
+
+        <!-- Note with README reference (no local path shown) but keep link attribute internally -->
+        <mxCell id="note" value="Deployment notes: See README.md"
+              style="text;rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b91c1c;fontSize=11"
+              vertex="1" parent="1">
+            <mxGeometry x="1420" y="120" width="260" height="86" as="geometry"/>
+        </mxCell>
+
+
+        <!-- Edges: Users -> Cloudflare -->
+        <mxCell id="edge_u_cf" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000" edge="1" parent="1" source="users" target="cloudflare">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cloudflare -> ALB -->
+        <mxCell id="edge_cf_alb" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#000000" edge="1" parent="1" source="cloudflare" target="alb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- ALB -> EC2 instances -->
+        <mxCell id="edge_alb_ec2_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1e3a8a" edge="1" parent="1" source="alb" target="ec2_1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_alb_ec2_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1e3a8a" edge="1" parent="1" source="alb" target="ec2_2">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_alb_ec2_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#1e3a8a" edge="1" parent="1" source="alb" target="ec2_3">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- EC2 instances -> MongoDB Atlas -->
+        <mxCell id="edge_ec2_mongo_1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16a34a" edge="1" parent="1" source="ec2_1" target="mongodb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_ec2_mongo_2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16a34a" edge="1" parent="1" source="ec2_2" target="mongodb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge_ec2_mongo_3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#16a34a" edge="1" parent="1" source="ec2_3" target="mongodb">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

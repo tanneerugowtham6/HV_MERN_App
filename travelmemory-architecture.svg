@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- TravelMemory architecture preview (SVG) -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080">
+  <style>
+    .box { fill:#fff; stroke:#111827; stroke-width:2; rx:8; }
+    .cloud { fill:#f59e0b; stroke:#b36b00; stroke-width:2; rx:8; }
+    .alb { fill:#3b82f6; stroke:#1e3a8a; stroke-width:2; rx:8; color:#fff; }
+    .ec2 { fill:#fb923c; stroke:#c2410c; stroke-width:2; rx:8; }
+    .mongo { fill:#16a34a; stroke:#14532d; stroke-width:2; rx:8; color:#fff; }
+    .meta { fill:#f3f4f6; stroke:#6b7280; stroke-width:1; rx:6; }
+    .note { fill:#ffffff; stroke:#b91c1c; stroke-width:1; rx:6; }
+    .label { font-family: Inter, Arial, Helvetica, sans-serif; fill:#0f172a; font-size:14px; }
+    .title { font-family: Inter, Arial, Helvetica, sans-serif; fill:#0f172a; font-size:18px; font-weight:700; }
+    .arrow { stroke:#111827; stroke-width:2; fill:none; marker-end:url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#111827"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="40" y="36" class="title">TravelMemory — Architecture (preview)</text>
+
+  <!-- Users -->
+  <g id="users">
+    <ellipse cx="120" cy="110" rx="80" ry="36" fill="#ffffff" stroke="#111827" stroke-width="2"/>
+    <text x="120" y="116" text-anchor="middle" class="label">Users (Browser)</text>
+  </g>
+
+  <!-- Cloudflare -->
+  <g id="cloudflare">
+    <rect x="240" y="76" width="180" height="64" class="cloud"/>
+    <text x="330" y="106" text-anchor="middle" class="label">Cloudflare</text>
+    <text x="330" y="122" text-anchor="middle" class="label" font-size="12">(DNS / CDN)</text>
+  </g>
+
+  <!-- ALB -->
+  <g id="alb">
+    <rect x="480" y="56" width="520" height="88" class="alb"/>
+    <text x="740" y="86" text-anchor="middle" fill="#ffffff" font-weight="700">Application Load Balancer</text>
+    <text x="740" y="106" text-anchor="middle" fill="#ffffff" font-size="12">tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com</text>
+  </g>
+
+  <!-- Target Group -->
+  <g id="tg">
+    <rect x="640" y="156" width="260" height="44" fill="#e6f0ff" stroke="#3b82f6" stroke-width="1"/>
+    <text x="770" y="184" text-anchor="middle" class="label">Target Group: travelmemory-tg • Health: /hello</text>
+  </g>
+
+  <!-- VPC / boundary -->
+  <rect x="440" y="220" width="1000" height="456" fill="none" stroke="#9ca3af" stroke-width="2" rx="10"/>
+  <text x="460" y="240" class="label">VPC • Security Groups</text>
+
+  <!-- ASG and EC2 instances -->
+  <text x="540" y="260" class="label" font-weight="700">Auto Scaling Group (travelmemory-asg)</text>
+
+  <!-- EC2 #1 -->
+  <g id="ec2-1">
+    <rect x="480" y="300" width="260" height="160" class="ec2"/>
+    <text x="610" y="338" text-anchor="middle" class="label" font-weight="700">EC2 Instance</text>
+    <text x="610" y="358" text-anchor="middle" class="label">Nginx (reverse proxy)</text>
+    <text x="610" y="376" text-anchor="middle" class="label">PM2</text>
+    <text x="610" y="394" text-anchor="middle" class="label">React (3000) • Node (3001)</text>
+  </g>
+
+  <!-- EC2 #2 -->
+  <g id="ec2-2">
+    <rect x="800" y="300" width="260" height="160" class="ec2"/>
+    <text x="930" y="338" text-anchor="middle" class="label" font-weight="700">EC2 Instance</text>
+    <text x="930" y="358" text-anchor="middle" class="label">Nginx (reverse proxy)</text>
+    <text x="930" y="376" text-anchor="middle" class="label">PM2</text>
+    <text x="930" y="394" text-anchor="middle" class="label">React (3000) • Node (3001)</text>
+  </g>
+
+  <!-- EC2 #3 -->
+  <g id="ec2-3">
+    <rect x="1120" y="300" width="260" height="160" class="ec2"/>
+    <text x="1250" y="338" text-anchor="middle" class="label" font-weight="700">EC2 Instance</text>
+    <text x="1250" y="358" text-anchor="middle" class="label">Nginx (reverse proxy)</text>
+    <text x="1250" y="376" text-anchor="middle" class="label">PM2</text>
+    <text x="1250" y="394" text-anchor="middle" class="label">React (3000) • Node (3001)</text>
+  </g>
+
+  <!-- MongoDB Atlas -->
+  <g id="mongo">
+    <rect x="1420" y="310" width="260" height="120" class="mongo"/>
+    <text x="1550" y="350" text-anchor="middle" fill="#ffffff" font-weight="700">MongoDB Atlas</text>
+    <text x="1550" y="372" text-anchor="middle" fill="#ffffff" class="label">tmcluster001 (atlas)</text>
+  </g>
+
+  <!-- AMI / Launch template -->
+  <g id="ami">
+    <rect x="760" y="540" width="420" height="76" class="meta"/>
+    <text x="970" y="566" text-anchor="middle" class="label">AMI: ami-07c14add6c1bc8599</text>
+    <text x="970" y="586" text-anchor="middle" class="label">Launch Template: lt-026d74058e68ee5c1</text>
+  </g>
+
+  <!-- Monitoring -->
+  <g id="monitor">
+    <rect x="1420" y="440" width="260" height="86" class="meta"/>
+    <text x="1550" y="468" text-anchor="middle" class="label">Monitoring / Logs</text>
+    <text x="1550" y="490" text-anchor="middle" class="label">CloudWatch & PM2 logs</text>
+  </g>
+
+  <!-- Optional S3/CloudFront -->
+  <g id="s3">
+    <rect x="1420" y="560" width="260" height="76" stroke="#9ca3af" fill="none" stroke-dasharray="6 4" rx="6"/>
+    <text x="1550" y="598" text-anchor="middle" class="label">(Optional) S3 + CloudFront</text>
+  </g>
+
+  <!-- Deployment notes / README note -->
+  <g id="note">
+    <rect x="1420" y="220" width="260" height="76" class="note"/>
+    <text x="1550" y="248" text-anchor="middle" class="label">Deployment notes: See README.md</text>
+  </g>
+
+  <!-- Arrows / connections -->
+  <!-- Users -> Cloudflare -->
+  <path d="M200 110 L240 110" class="arrow"/>
+
+  <!-- Cloudflare -> ALB -->
+  <path d="M420 110 L480 110" class="arrow"/>
+
+  <!-- ALB -> EC2s -->
+  <path d="M740 136 L610 220" class="arrow"/>
+  <path d="M740 136 L930 220" class="arrow"/>
+  <path d="M740 136 L1250 220" class="arrow"/>
+
+  <!-- EC2 -> Mongo -->
+  <path d="M740 380 L1420 380" stroke="#16a34a" stroke-width="2" marker-end="url(#arrowhead)"/>
+
+  <!-- small footnote -->
+  <text x="40" y="1040" class="label" font-size="12">Diagram: high-level preview — export as PNG for README (1920×1080)</text>
+</svg>
