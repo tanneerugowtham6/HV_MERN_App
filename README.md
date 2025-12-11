@@ -366,9 +366,123 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ---
 
-## Phase 3: Frontend SSL Preparation
+## Phase 3: Domain Integration and SSL Configuration
 
-### Task-1: Install Nginx and configure reverse-proxy
+### Task-1: Create Cloudflare DNS records
+
+**Pre-requisites**
+
+- Domain (`yourdomain.com` or something similar)
+- Public IP of Backend Instance
+- public IP of Frontend Instance
+
+#### Steps:
+
+1. Login to your Cloud flare account
+
+    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/4a3be70a-676b-411c-a182-a10fb7cd5c75" />
+
+2. Click on the domain name, which navigates to the configuration page as below
+
+    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/e23fee4c-9305-4b21-8f5e-653f6f891440" />
+
+3. From the left sidebar, expand **DNS** and click on **Records**, then click on **Add record**
+
+    <img width="1283" height="310" alt="image" src="https://github.com/user-attachments/assets/558f899c-e8ea-4e84-952c-3e3bff574921" />
+
+4. Add below Records one at a time and click on **Save**
+
+    **Type:** A  
+    **Name:** backend  
+    **Target:** Public_IP of Backend Instance (Elastic IP)  
+    **Proxy status:** Disabled  
+
+    <img width="1070" height="345" alt="image" src="https://github.com/user-attachments/assets/e672e8bd-b0a8-47af-a35c-561654172d6e" />
+
+    **Type:** A  
+    **Name:** @  
+    **Target:** Public_IP of Frontend Instance (Elastic IP)  
+    **Proxy status:** Disabled  
+
+    <img width="1228" height="411" alt="image" src="https://github.com/user-attachments/assets/bcf972dc-4507-4305-8417-8ebbf02e1567" />
+
+    **Type:** A  
+    **Name:** www  
+    **Target:** Public_IP of Frontend Instance (Elastic IP)  
+    **Proxy status:** Disabled  
+   
+    <img width="1070" height="345" alt="image" src="https://github.com/user-attachments/assets/bd5dba51-2057-46ff-9da3-a6e2d6299008" />
+
+6. Verify the if the records created
+
+    <img width="1081" height="330" alt="image" src="https://github.com/user-attachments/assets/6c6c57af-e6ff-4cd0-bb71-f416348c6aff" />
+
+### Task-2: Install Nginx and configure reverse-proxy on Backend Instance
+
+#### Steps:
+
+1. Login to the Backend server and execute below commands
+
+    ```sh
+    sudo apt update
+    sudo apt install nginx -y
+    ```
+
+    <img width="873" height="204" alt="image" src="https://github.com/user-attachments/assets/cb6d675b-92bd-48a6-944e-2b7bda668c6a" />
+
+2. Take the backup of current configuration file
+
+    ```sh
+    sudo cp /etc/nginx/sites-available/default /etc/nginx/sites-available/default.bak.$(date +%F_%T)
+    ```
+
+3. Replace the content of `default` nginx configuration file with the `backend-nginx-config` file from this repository
+
+    ```sh
+    sudo nano /etc/nginx/sites-available/default
+    ```
+
+    <img width="507" height="307" alt="image" src="https://github.com/user-attachments/assets/a862d75d-2421-4132-b039-58e9b8e319e2" />
+
+    Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
+
+4. Test the nginx configuration and reload the Nginx service
+
+    ```sh
+    sudo nginx -t
+    sudo systemctl reload nginx
+    ```
+
+    <img width="477" height="62" alt="image" src="https://github.com/user-attachments/assets/df8ab749-a012-4535-bc1e-4531d7357c1c" />
+
+
+### Task-3: Install SSL using certbot(get certs from Let's Encrypt) on Backend instance
+
+#### Steps:
+
+1. After the nginx configuration file has been updated, execute the below commands
+
+    ```sh
+    sudo apt install certbot python3-certbot-nginx
+    ```
+
+    <img width="873" height="645" alt="image" src="https://github.com/user-attachments/assets/e46b1815-c2cc-4d41-afee-20a7dac0e844" />
+
+2. Once certbot has been installed, get the certificates using the below command
+
+    ```sh
+    sudo certbot --nginx -d backend.gowthamtanneeru.online
+    ```
+
+    <img width="793" height="297" alt="image" src="https://github.com/user-attachments/assets/9df68430-5e32-413c-839c-62997c91c9b5" />
+
+4. Once Certificates has been issued, verify the application by visiting `https://backend.yourdomain.com/hello`
+
+    <img width="501" height="95" alt="image" src="https://github.com/user-attachments/assets/1c4e65ac-e87c-42a8-8dd8-4ce4c6e4a59b" />
+
+**Make sure the A Record for backend.<YOUR-DOMAIN> exists and points to Backend instance Public IP in Cloudflare for now.**
+
+### Task-4: Install Nginx and configure reverse-proxy on Frontend Instance
 
 #### Steps:
 
@@ -389,40 +503,27 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="874" height="18" alt="image" src="https://github.com/user-attachments/assets/14712eee-f5fd-4554-bf74-2da51b937288" />
 
-3. Update the location field as with below script in configuration file
+3. Replace the content of `default` nginx configuration file with the `backend-nginx-config` file from this repository
 
     ```sh
     sudo nano /etc/nginx/sites-available/default
     ```
 
-    <img width="515" height="17" alt="image" src="https://github.com/user-attachments/assets/b854895f-d3ce-4ea1-a956-fff5f6e8ed35" />
-
-    ```
-    location / {
-        proxy_pass http://127.0.0.1:3000;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection 'upgrade';
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    }
-    ```
-    
-    <img width="629" height="982" alt="image" src="https://github.com/user-attachments/assets/d33420d8-9dbc-4b83-a241-402370ce64f3" />
+    <img width="507" height="307" alt="image" src="https://github.com/user-attachments/assets/a862d75d-2421-4132-b039-58e9b8e319e2" />
 
     Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
 
-4. Restart the Nginx service
+4. Test the nginx configuration and reload the Nginx service
 
     ```sh
+    sudo nginx -t
     sudo systemctl restart nginx
     ```
 
-    <img width="404" height="16" alt="image" src="https://github.com/user-attachments/assets/ebb64ae8-3709-4a78-adef-189134ad56e9" />
+    <img width="477" height="62" alt="image" src="https://github.com/user-attachments/assets/df8ab749-a012-4535-bc1e-4531d7357c1c" />
 
-### Task-2: Install SSL using certbot
+
+### Task-3: Install SSL using certbot(get certs from Let's Encrypt) on Backend instance
 
 #### Steps:
 
@@ -437,14 +538,15 @@ The following diagram represents the complete AWS architecture used to deploy, s
 2. Once certbot has been installed, get the certificates using the below command
 
     ```sh
-    sudo certbot --nginx -d gowthamtanneeru.online -d www.gowthamtanneeru.online
+    sudo certbot --nginx -d backend.gowthamtanneeru.online
     ```
     
-3. Once Certificates has been issued, verify the application
+4. Once Certificates has been issued, verify the application by visiting `https://backend.yourdomain.com/hello`
 
-    <img width="891" height="339" alt="image" src="https://github.com/user-attachments/assets/ff8df0c5-4130-445c-a144-0a89bcc42f40" />
+    <img width="501" height="95" alt="image" src="https://github.com/user-attachments/assets/1c4e65ac-e87c-42a8-8dd8-4ce4c6e4a59b" />
 
-**Make sure the A Records for both <YOUR-DOMAIN> and www.<YOUR-DOMAIN> exists and points to Frontend instance Public IP in Cloudflare for now. You can refer to the steps Phase-5**
+
+**Make sure the A Records for both <YOUR-DOMAIN> and www.<YOUR-DOMAIN> exists and points to Frontend instance Public IP in Cloudflare for now.**
 
 ---
 
@@ -637,46 +739,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ## Phase 5: Domain Integration via Cloudflare  
 
-### Task-1: Create Cloudflare DNS records
 
-**Pre-requisites**
-
-- Domain (gowthamtanneeru.online)
-- ALB DNS Name: tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com
-
-#### Steps:
-
-1. Login to your Cloud flare account
-
-    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/4a3be70a-676b-411c-a182-a10fb7cd5c75" />
-
-2. Click on the domain name, which navigates to the configuration page as below
-
-    <img width="1710" height="981" alt="image" src="https://github.com/user-attachments/assets/e23fee4c-9305-4b21-8f5e-653f6f891440" />
-
-3. From the left sidebar, expand **DNS** and click on **Records**, then click on **Add record**
-
-    <img width="1283" height="310" alt="image" src="https://github.com/user-attachments/assets/558f899c-e8ea-4e84-952c-3e3bff574921" />
-
-4. Add below Records one at a time and click on **Save**
-
-    **Type:** CNAME
-    **Name:** www
-    **Target:** tmmernapplb001-1162399349.us-east-1.elb.amazonaws.com
-    **Proxy status:** Disabled
-
-    <img width="1228" height="411" alt="image" src="https://github.com/user-attachments/assets/a3671f1c-2d14-4417-a6ff-2a1ccad7cc05" />
-
-    **Type:** A
-    **Name:** @
-    **Target:** Public_IP of Instance (Elastic IP)
-    **Proxy status:** Disabled
-
-    <img width="1228" height="411" alt="image" src="https://github.com/user-attachments/assets/bcf972dc-4507-4305-8417-8ebbf02e1567" />
-
-6. Verify the if the records created
-
-    <img width="1276" height="349" alt="image" src="https://github.com/user-attachments/assets/c30d562d-63a7-4980-a9ea-e87dd6f688e2" />
 
 7. Validate the domain by visiting `http://www.gowthamtanneeru.online` or `http://gowthamtanneeru.online`
 
