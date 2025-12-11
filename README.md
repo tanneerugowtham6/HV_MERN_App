@@ -18,8 +18,8 @@ This project is executed in **4 phases**, each containing a set of clear deploym
 ### Phases of Deployment
 - **Phase 1:** Instance Setup & Environment Preparation
 - **Phase 2:** Application Deployment (Backend + Frontend)
-- **Phase 3:** Scaling & Load Balancing
-- **Phase 4:** Domain Integration via Cloudflare
+- **Phase 3:** Domain Integration and SSL Configuration
+- **Phase 4:** Scaling & Load Balancing
 - **Phase 5:** Enable HTTPS with Cloudflare Origin CA and Nginx Reverse Proxy
 
 ---
@@ -482,6 +482,10 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 **Make sure the A Record for `backend.<YOUR-DOMAIN>` exists and points to Backend instance Public IP in Cloudflare for now.**
 
+5. Update the `REACT_APP_BACKEND_URL` with `https://` in `Travelmemory/frontend/.env` file in frontend instance
+
+    <img width="440" height="40" alt="image" src="https://github.com/user-attachments/assets/ec9c5a38-97f1-413b-a967-7bf0462a0233" />
+
 ### Task-4: Install Nginx and configure reverse-proxy on Frontend Instance
 
 #### Steps:
@@ -522,7 +526,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="503" height="61" alt="image" src="https://github.com/user-attachments/assets/d7188c2a-a0d6-45c9-beb8-955797a4e7cb" />
 
-### Task-3: Install SSL using certbot(get certs from Let's Encrypt) on Backend instance
+### Task-5: Install SSL using certbot(get certs from Let's Encrypt) on Frontend instance
 
 #### Steps:
 
@@ -537,13 +541,14 @@ The following diagram represents the complete AWS architecture used to deploy, s
 2. Once certbot has been installed, get the certificates using the below command
 
     ```sh
-    sudo certbot --nginx -d backend.gowthamtanneeru.online
+    sudo certbot --nginx -d gowthamtanneeru.online -d www.gowthamtanneeru.online
     ```
-    
-4. Once Certificates has been issued, verify the application by visiting `https://backend.yourdomain.com/hello`
 
-    <img width="501" height="95" alt="image" src="https://github.com/user-attachments/assets/1c4e65ac-e87c-42a8-8dd8-4ce4c6e4a59b" />
+    <img width="894" height="317" alt="image" src="https://github.com/user-attachments/assets/20032b88-4d34-4fd2-82e5-60f7736347c6" />
 
+4. Once Certificates has been issued, verify the application by visiting `https://yourdomain.com`
+
+    <img width="1708" height="525" alt="image" src="https://github.com/user-attachments/assets/5369e91b-5356-4506-b6b5-fa12b429b712" />
 
 **Make sure the A Records for both <YOUR-DOMAIN> and www.<YOUR-DOMAIN> exists and points to Frontend instance Public IP in Cloudflare for now.**
 
@@ -557,16 +562,17 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 1. Navigate to the EC2 Console, select the EC2 instance and click on **Actions** dropdown in the **Image and templates** > **Create Image**
 
-    <img width="1438" height="281" alt="image" src="https://github.com/user-attachments/assets/614f6692-c175-4826-afdf-8e0a1c3d5292" />
+    <img width="1467" height="270" alt="image" src="https://github.com/user-attachments/assets/73b32eb6-394e-4f8a-9649-06f8c5b06989" />
 
 2. Enter the **Image name** and **Image description**
 
-    <img width="1342" height="837" alt="image" src="https://github.com/user-attachments/assets/7f514a64-6128-4992-9411-2c6cfeb3b965" />
+    <img width="1419" height="865" alt="image" src="https://github.com/user-attachments/assets/8eb77dfb-eaf6-4e25-bc01-c14f9b1d9f0e" />
 
 3. Click on **Create image**
-4. On the left sidebar, click on AMIs and check if the AMI is created successfully and status shows **Available**
+4. Once the Backend Instance Image is created, repeat the same steps to create Image of the Frontend Instance
+5. On the left sidebar, click on AMIs and check if the AMI is created successfully and status shows **Available**
 
-    <img width="1441" height="166" alt="image" src="https://github.com/user-attachments/assets/92d23b18-2381-43ef-b8f5-24f653d46d56" />
+    <img width="1455" height="171" alt="image" src="https://github.com/user-attachments/assets/472a6f27-5e55-476b-bc41-8798aac90af9" />
 
 ### Task-2: Create a Launch Template
 
@@ -578,11 +584,11 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 2. Enter the name of the **Launch template name** and **Template version description**
 
-    <img width="1138" height="411" alt="image" src="https://github.com/user-attachments/assets/3a2f2d7c-103b-4c15-ba9e-660bdf82fcd4" />
+    <img width="1129" height="400" alt="image" src="https://github.com/user-attachments/assets/2ab2a1bb-cb93-443b-a718-98256633b771" />
 
-3. Under the **Launch template contents** section, click on **My AMIs** and select the AMI created in previous Task.
+3. Under the **Launch template contents** section, click on **My AMIs** and select the required AMI created in the previous Task.
 
-    <img width="1125" height="713" alt="image" src="https://github.com/user-attachments/assets/f054cdce-a07b-4e4d-91d1-58f47a29f309" />
+    <img width="1121" height="710" alt="image" src="https://github.com/user-attachments/assets/b18cc005-6d52-4c14-b710-a72edbd10f44" />
 
 4. Select the **Instance type** as **t3.micro**, select previously created kerpair and Security groups under **Key pair** and **Network settings** section
 
@@ -592,10 +598,10 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="569" height="486" alt="image" src="https://github.com/user-attachments/assets/8fb93798-db43-4c9c-8cb4-fb08d600cc26" />
 
-6. Once done, navigate to the Launch templates and check for the new created template
+6. Once the Launch template for the Backend Instance is created, repeat the same steps to create Launch template for the Frontend Instance
+7. Once done, navigate to the Launch templates and check for the new created template
 
-    <img width="1675" height="79" alt="image" src="https://github.com/user-attachments/assets/cc248649-b785-446c-bf21-ff783c8c1445" />
-    <img width="1441" height="154" alt="image" src="https://github.com/user-attachments/assets/0c3a74ec-e6d7-40a3-ade9-d7a1c70bee03" />
+    <img width="1444" height="181" alt="image" src="https://github.com/user-attachments/assets/5ee21232-5b4a-4450-baea-1e6923a3208e" />
 
 ### Task-3: Create a Target Group for the ALB
 
