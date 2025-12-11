@@ -480,7 +480,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="501" height="95" alt="image" src="https://github.com/user-attachments/assets/1c4e65ac-e87c-42a8-8dd8-4ce4c6e4a59b" />
 
-**Make sure the A Record for backend.<YOUR-DOMAIN> exists and points to Backend instance Public IP in Cloudflare for now.**
+**Make sure the A Record for `backend.<YOUR-DOMAIN>` exists and points to Backend instance Public IP in Cloudflare for now.**
 
 ### Task-4: Install Nginx and configure reverse-proxy on Frontend Instance
 
@@ -503,13 +503,13 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="874" height="18" alt="image" src="https://github.com/user-attachments/assets/14712eee-f5fd-4554-bf74-2da51b937288" />
 
-3. Replace the content of `default` nginx configuration file with the `backend-nginx-config` file from this repository
+3. Replace the content of `default` nginx configuration file with the `frontend-nginx-config` file from this repository
 
     ```sh
     sudo nano /etc/nginx/sites-available/default
     ```
 
-    <img width="507" height="307" alt="image" src="https://github.com/user-attachments/assets/a862d75d-2421-4132-b039-58e9b8e319e2" />
+    <img width="518" height="306" alt="image" src="https://github.com/user-attachments/assets/4a5fb369-c64b-4868-8f39-579a089d9e6c" />
 
     Save the file and Exit [`Ctrl+x` & `Enter` (or) `control+x` & `return`]
 
@@ -517,11 +517,10 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     ```sh
     sudo nginx -t
-    sudo systemctl restart nginx
+    sudo systemctl reload nginx
     ```
 
-    <img width="477" height="62" alt="image" src="https://github.com/user-attachments/assets/df8ab749-a012-4535-bc1e-4531d7357c1c" />
-
+    <img width="503" height="61" alt="image" src="https://github.com/user-attachments/assets/d7188c2a-a0d6-45c9-beb8-955797a4e7cb" />
 
 ### Task-3: Install SSL using certbot(get certs from Let's Encrypt) on Backend instance
 
