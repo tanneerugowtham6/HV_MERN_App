@@ -8,7 +8,6 @@ The objective is to ensure the application is fully operational, scalable, secur
 
 As a DevOps Engineer, your role is to deploy and scale this application using AWS services while adhering to cloud architecture best practices.
 
-
 ---
 
 ## Project Execution Overview
@@ -45,6 +44,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 - AMI
 - Launch Template
 - Auto Scaling Group (ASG)
+- Amazon Certificat Manager (ACM)
 - Application Load Balancer (ALB)
 - Security Groups
 - VPC
@@ -54,7 +54,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ### Additional Services
 - Cloudflare
-
+- Nginx (Reverse-Proxy)
 
 ## Technology Stack
 
