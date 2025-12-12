@@ -75,14 +75,6 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 ---
 
-## Post Deployment Screenshots
-
-### Home Page
-
-<img width="1710" height="1073" alt="image" src="https://github.com/user-attachments/assets/ae7a2968-b55f-4932-aeb5-e81ff26a6dcf" />
-
----
-
 ## Phase 1: Instance Setup & Environment Preparation 
 
 ### Task-1: Launching EC2 Instance for frontend and Backend Deployment
@@ -901,3 +893,11 @@ pm2 restart travelmemory-frontend
 <img width="1069" height="170" alt="image" src="https://github.com/user-attachments/assets/49d4eb2b-1e7a-4849-9f43-586bc52b0b3a" />
 
 You can see the application be working fine.
+
+---
+
+## Post Deployment Screenshots
+
+### Home Page
+
+<img width="1710" height="1073" alt="image" src="https://github.com/user-attachments/assets/ae7a2968-b55f-4932-aeb5-e81ff26a6dcf" />
