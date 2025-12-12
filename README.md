@@ -16,11 +16,11 @@ As a DevOps Engineer, your role is to deploy and scale this application using AW
 This project is executed in **4 phases**, each containing a set of clear deployment tasks required to fully host and scale the Travel Memory MERN application on AWS.
 
 ### Phases of Deployment
+
 - **Phase 1:** Instance Setup & Environment Preparation
 - **Phase 2:** Application Deployment (Backend + Frontend)
 - **Phase 3:** Domain Integration and SSL Configuration
 - **Phase 4:** Scaling & Load Balancing
-- **Phase 5:** Enable HTTPS with Cloudflare Origin CA and Nginx Reverse Proxy
 
 ---
 
@@ -620,7 +620,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1368" height="669" alt="image" src="https://github.com/user-attachments/assets/0bef6b87-bb07-44c5-92f5-8572b6254035" />
 
-4. Select the **VPC** same as your instance and leave the remaining values to default
+4. Select the **VPC** same as your instance, set **Health checks** paramaters as **Health check protocol: HTTPS**; **Health check path: /hello** and leave the remaining values to default
 
     <img width="1123" height="159" alt="image" src="https://github.com/user-attachments/assets/64978124-8ddc-4fa8-8e8f-af7af8110e94" />
 
@@ -637,7 +637,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1399" height="331" alt="image" src="https://github.com/user-attachments/assets/44415dd9-1d20-433b-a50a-4513fe17e4e1" />
 
-9. Once the **Target group** is created, repeat the same steps to create target group for frontend
+9. Once the **Target group** is created, repeat the same steps to create target group for frontend (**Health checks** paramaters has to be set as **Health check protocol: HTTPS**; **Health check path: /hello**)
 
     <img width="1444" height="187" alt="image" src="https://github.com/user-attachments/assets/194b4118-52ff-45cd-a551-1032adb02f54" />
 
@@ -681,7 +681,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 3. Enter **Load balancer name** and select **Internet-facing** scheme
 
-    <img width="1646" height="495" alt="image" src="https://github.com/user-attachments/assets/600e7e92-0216-4082-8a7d-acb8578213cb" />
+    <img width="1395" height="447" alt="image" src="https://github.com/user-attachments/assets/29d1244c-c9b7-4f20-bb24-42e1c0127015" />
 
 4. Under **Network mapping** section, select the VPC same as your instance and select 2 public subnets in different availability zones
 
@@ -703,19 +703,28 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1391" height="859" alt="image" src="https://github.com/user-attachments/assets/725e8984-c3fc-4e4b-b2c1-05300879e40b" />
 
-8. Under **Secure listener settings**  select the certificate created in ACM from **Certificate (from ACM)** dropdown
+7. Under **Secure listener settings**  select the certificate created in ACM from **Certificate (from ACM)** dropdown
 
     <img width="1398" height="481" alt="image" src="https://github.com/user-attachments/assets/80c9ede0-bf37-4b94-a679-7ac5156949df" />
 
-9. Scroll down and click on **Create load balancer**
+8. Scroll down and click on **Create load balancer**
 
     <img width="269" height="66" alt="image" src="https://github.com/user-attachments/assets/1c38a310-4c41-4a1c-a2fb-6c6307b635b2" />
 
-10. Wait till the Load balacer status become **Active**
+9. Wait till the Load balacer status become **Active**
 
     <img width="1710" height="939" alt="image" src="https://github.com/user-attachments/assets/8f00b9c8-d477-45ad-b153-59ac7acbcc31" />
 
+10. Select the newly created Load balancer and copy the **DNS Name** and update the respective record as **CNAME** in **DNS Records**
+
+    <img width="1071" height="70" alt="image" src="https://github.com/user-attachments/assets/39e9a567-80ff-4ee5-bafa-1bddb66fb79c" />
+
 11. Repeat the steps to create another Load balancer for the backend
+12. Once the Load balancers have been created, verify the targets status of **Target groups** is **Healthy**
+
+    <img width="1464" height="80" alt="image" src="https://github.com/user-attachments/assets/5c67e946-a095-4076-8f36-71d09646ae28" />
+    <img width="1474" height="205" alt="image" src="https://github.com/user-attachments/assets/e6216c91-4247-4675-9ee2-0e7ab706f535" />
+    <img width="1474" height="205" alt="image" src="https://github.com/user-attachments/assets/140d39cc-f5bb-4932-ae3a-8bbe4944bd1a" />
 
 ### Task-5: Create Auto Scaling Group (ASG)
 
@@ -725,17 +734,17 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1483" height="820" alt="image" src="https://github.com/user-attachments/assets/81a393c1-86f1-4066-a7b0-8c6f1e2d9dd2" />
 
-2. Click on **Create Auto Scaling group**
+2. Click on **Create Auto Scaling group** for backend
 
     <img width="397" height="191" alt="image" src="https://github.com/user-attachments/assets/0fd41c6c-1964-424b-b654-1e9b048f97d6" />
 
 3. Enter **Auto Scaling group name**
 
-    <img width="1446" height="330" alt="image" src="https://github.com/user-attachments/assets/79adaa87-a3d3-42df-9315-22f324549c76" />
+    <img width="1552" height="275" alt="image" src="https://github.com/user-attachments/assets/6b60049a-e20b-4fed-9743-c43cf7a7196a" />
 
 4. Select the **Launch template** which was created in the previous task and select the **Default** version
 
-    <img width="1371" height="752" alt="image" src="https://github.com/user-attachments/assets/a5fa4974-b33a-41c0-9473-1489dd975958" />
+    <img width="1126" height="644" alt="image" src="https://github.com/user-attachments/assets/a9b07265-98b6-47b0-b068-de484000fb78" />
 
 5. Click on **Next**
 6. Leave **Instance type requirements** to defaults
@@ -745,7 +754,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 8. Under **Load balancing options**, select **Attach to an existing load balancer** and **Choose from your load balancer target groups**, then select the target group created in previous task
 
-    <img width="1371" height="505" alt="image" src="https://github.com/user-attachments/assets/22b9f9e9-4043-47a7-9ac3-683f9dc80265" />
+    <img width="1119" height="421" alt="image" src="https://github.com/user-attachments/assets/11db6c93-03a5-4b83-a4ff-99abc7b6fe71" />
 
 9. Leave the remaining to defaults and click on **Next**
 10. Under **Group size** section, enter **Desire capacity** as **1**
@@ -762,9 +771,10 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="428" height="77" alt="image" src="https://github.com/user-attachments/assets/3779a7ed-e234-4f5c-9525-bdcedd8360aa" />
 
-15. Verify that ASG has created
+15. Repeat the same steps to create ASG for frontend
+16. Verify that ASG has created
 
-    <img width="1435" height="162" alt="image" src="https://github.com/user-attachments/assets/e1262f6d-7ad5-4109-9dc9-65951962ae54" />
+    <img width="1446" height="182" alt="image" src="https://github.com/user-attachments/assets/2abfcfac-5740-4382-a30c-e7635eab1743" />
 
 ### Task-6: Verify the Load distribution
 
@@ -775,118 +785,6 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1457" height="681" alt="image" src="https://github.com/user-attachments/assets/61244e43-d0e1-401a-a1e2-0f0077e07bcf" />
 
----
-
-## Phase 5: Domain Integration via Cloudflare  
-
-
-
-7. Validate the domain by visiting `http://www.gowthamtanneeru.online` or `http://gowthamtanneeru.online`
-
-    <img width="1500" height="513" alt="image" src="https://github.com/user-attachments/assets/825075c0-b4d6-4a78-b4e8-8cd118b0efb4" />
-
----
-
-## Phase 5: Enable HTTPS with Cloudflare Origin CA and Nginx Reverse Proxy  
-
-### Task-1: Generate Cloudflare Origin CA Certificate
-
-#### Steps:
-
-1. Navigate to the **Cloudflare Dashboard**
-2. Form the Left sidebar, click on **Origin Server** under **SSL/TLS** section, click on **Create Certificate**
-
-    <img width="1710" height="983" alt="image" src="https://github.com/user-attachments/assets/fb8fe5d2-1234-4481-b847-63fccdfc3293" />
-
-3. By default all the details are pre-filled, if not enter the details as below
-
-    **Private key type:** RSA  
-    **Hostnames:** `yourdomain` & `*.yourdomain`  
-    
-    <img width="1058" height="744" alt="image" src="https://github.com/user-attachments/assets/a8ad5f80-586e-47f9-a21a-8ff6891a10e5" />
-
-4. Click on Create
-5. After the certifates are successfully created, Cloudflare provides two .pem files [Origin Certificate, Private Key]
-6. Save them locally as `origin.pem` and `origin.key`
-7. Click on **OK**
-
-    <img width="963" height="731" alt="image" src="https://github.com/user-attachments/assets/c8c34f8e-0c7b-4303-b7d3-f5bff84b91b3" />
-
-### Task-2: Upload certificate files to EC2 using SCP
-
-#### Steps:
-
-1. From your local machine copy the files the server
-
-    ```sh
-    scp -i <PATH_TO_PEM_KEY> <PATH_TO_PEM>/origin.pem <EC2_USER>@<EC2_PUBLIC_IP>:/home/<EC2_USER>/
-    scp -i <PATH_TO_PEM_KEY> <PATH_TO_KEY>/origin.key <EC2_USER>@<EC2_PUBLIC_IP>:/home/<EC2_USER>/
-    ```
-
-    - <PATH_TO_PEM> → location where you saved origin.pem
-    - <PATH_TO_KEY> → location where you saved origin.key
-    - <EC2_USER> → ubuntu if you're using ubuntu image
-    - <EC2_PUBLIC_IP> → Elastic IP of your EC2 instance
-    - <PATH_TO_PEM_KEY> → Your EC2 Instance private key (You must have executable permissions for this)
-
-    <img width="1710" height="107" alt="image" src="https://github.com/user-attachments/assets/ed6c74a4-c589-49f6-a8b0-32226442bc96" />
-
-### Task-3: Install Origin CA Certificate on EC2
-
-#### Steps:
-
-1. Move the cert files to system paths
-
-    ```sh
-    sudo mv origin.pem /etc/ssl/certs/
-    sudo mv origin.key /etc/ssl/private/
-    ```
-
-    <img width="437" height="32" alt="image" src="https://github.com/user-attachments/assets/1eed53e9-bd18-4740-b7b4-c09fec6f3e43" />
-
-2. Assign permissions to both teh files
-
-    ```sh
-    sudo chmod 644 /etc/ssl/certs/origin.pem
-    sudo chmod 600 /etc/ssl/private/origin.key
-    ```
-
-    <img width="481" height="46" alt="image" src="https://github.com/user-attachments/assets/83d93649-a4cd-4272-bfba-e8431c90fe09" />
-
-3. Assign the owenrship to the files
-
-    ```sh
-    sudo chown root:root /etc/ssl/certs/origin.pem
-    sudo chown root:root /etc/ssl/private/origin.key
-    ```
-
-    <img width="525" height="46" alt="image" src="https://github.com/user-attachments/assets/af608557-852e-421d-a806-61d62b286d6a" />
-
-4. Verify the permissions have been set correctly
-
-    ```sh
-    sudo ls -l /etc/ssl/certs/origin.pem
-    sudo ls -l /etc/ssl/private/origin.key
-    ```
-
-    <img width="525" height="75" alt="image" src="https://github.com/user-attachments/assets/1c756180-4e0c-497d-abce-3a8cc8e32cfd" />
-
-### Task-4: Configure Nginx for SSL + Reverse Proxy
-
-#### Steps:
-
-1. Install nginx on the EC2 instance
-
-    ```sh
-    sudo apt install nginx -y
-    ```
-
-    <img width="872" height="631" alt="image" src="https://github.com/user-attachments/assets/3a75cc1c-0f67-4bfd-b77a-ffb4dde45b58" />
-
-2. sd
-3. v
-4. sd
-5. d s
 ---
 
 ## Issues observed
