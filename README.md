@@ -665,6 +665,8 @@ The following diagram represents the complete AWS architecture used to deploy, s
 6. Repeat the same steps for your backend domain.
 7. Open the requested certificate and add the **CNAME name** and **CNAME value** in **Cloudflare** under DNS records, post which the certificate status changes to Success in few minutes
 
+    <img width="1073" height="138" alt="image" src="https://github.com/user-attachments/assets/500af8cf-a457-4d93-ab85-d545ef8d42ee" />
+
 ### Task-5: Create a Load Balancer (ALB)
 
 #### Steps:
