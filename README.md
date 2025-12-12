@@ -641,7 +641,31 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1444" height="187" alt="image" src="https://github.com/user-attachments/assets/194b4118-52ff-45cd-a551-1032adb02f54" />
 
-### Task-4: Create a Load Balancer (ALB)
+### Task-4: Request Amazon Certificates for Load Balancers
+
+#### Steps:
+
+1. In the AWS Console, search for **Certificate Manager** service and open it in a new tab
+
+    <img width="1059" height="279" alt="image" src="https://github.com/user-attachments/assets/2a1ea083-10e6-4d45-89dc-a77db59c1d2d" />
+
+2. Click on **Request a certificate** button
+
+    <img width="1037" height="280" alt="image" src="https://github.com/user-attachments/assets/d77225b8-93b6-4708-95b6-792c4b7e6d14" />
+
+3. Select **Request a public certificate** and click on **Next**
+
+    <img width="1403" height="278" alt="image" src="https://github.com/user-attachments/assets/0666d12f-43f2-4bb8-b48f-e09944755f7e" />
+
+4. In **Request a public certificate** page, under **Domain names** enter the required domains (i.e, yourdomain.com and www.yourdomain.com) using **Add another name to this certificate** if multiple domain names to be added
+
+    <img width="1249" height="880" alt="image" src="https://github.com/user-attachments/assets/7db8dc11-7868-4dbc-a7c3-31bb92a5ab7b" />
+
+5. Leave the remaining values to default and click on **Request** button
+6. Repeat the same steps for your backend domain.
+7. Since this process might take from minimum 30 minutes to 48 hours, make sure you get these certificates in prior creation of Load Balancers
+
+### Task-5: Create a Load Balancer (ALB)
 
 #### Steps:
 
