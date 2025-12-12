@@ -612,31 +612,34 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
     <img width="1692" height="969" alt="image" src="https://github.com/user-attachments/assets/0a19173b-b64b-4a6c-b102-1dcadc18f1bd" />
 
-3. On the **Create target group** page, under **settings** section select 
-    **Target type:** Instances
-    **Target group name:** tmmernapp-tg
-    **Protocol:** HTTP
-    **Port:** 3000
+3. On the **Create target group** page, under **settings** section select  
+    **Target type:** Instances  
+    **Target group name:** tmmernapp-tg  
+    **Protocol:** HTTPS  
+    **Port:** 80  
 
-    <img width="1067" height="678" alt="image" src="https://github.com/user-attachments/assets/31071ab2-2f87-4e87-82dd-24df21aacbdc" />
+    <img width="1368" height="669" alt="image" src="https://github.com/user-attachments/assets/0bef6b87-bb07-44c5-92f5-8572b6254035" />
 
 4. Select the **VPC** same as your instance and leave the remaining values to default
 
     <img width="1123" height="159" alt="image" src="https://github.com/user-attachments/assets/64978124-8ddc-4fa8-8e8f-af7af8110e94" />
 
 5. Click on **Next**
-6. Under the **Register targets** section, select the Instance where the application has been hosted and click on **Include as pending below** (Repeat this step if you have multiple instances)
+6. Under the **Register targets** section, select the Instance where the required application has been hosted and click on **Include as pending below** (Repeat this step if you have multiple instances)
 
-    <img width="1399" height="516" alt="image" src="https://github.com/user-attachments/assets/953247f0-24dd-43f9-a1e1-ecdf110c3877" />
+    <img width="1395" height="581" alt="image" src="https://github.com/user-attachments/assets/00c5438f-7937-4be8-b487-a30b34086491" />
 
 7. Now you can see the targets added under **Review targets**, then click on **Next**
 
-    <img width="1399" height="331" alt="image" src="https://github.com/user-attachments/assets/0d5fce18-8a85-41d2-b5b5-ad9521a65f07" />
+    <img width="1395" height="328" alt="image" src="https://github.com/user-attachments/assets/a77ab983-8976-4e96-a3bc-8d67646608e4" />
 
 8. Click on **Create target group**
 
     <img width="1399" height="331" alt="image" src="https://github.com/user-attachments/assets/44415dd9-1d20-433b-a50a-4513fe17e4e1" />
-    <img width="1435" height="165" alt="image" src="https://github.com/user-attachments/assets/bce3285d-bcfb-4eb4-aa68-2c3267001299" />
+
+9. Once the **Target group** is created, repeat the same steps to create target group for frontend
+
+    <img width="1444" height="187" alt="image" src="https://github.com/user-attachments/assets/194b4118-52ff-45cd-a551-1032adb02f54" />
 
 ### Task-4: Create a Load Balancer (ALB)
 
