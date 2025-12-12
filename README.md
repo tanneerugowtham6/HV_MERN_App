@@ -28,6 +28,8 @@ This project is executed in **4 phases**, each containing a set of clear deploym
 
 The following diagram represents the complete AWS architecture used to deploy, scale, and route traffic for the Travel Memory MERN application.
 
+<img width="1331" height="862" alt="Untitled Diagram drawio" src="https://github.com/user-attachments/assets/efdb52be-d72a-402d-be27-5d60f45c5ee5" />
+
 ---
 
 ## Environment
