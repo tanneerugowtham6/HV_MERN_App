@@ -663,7 +663,7 @@ The following diagram represents the complete AWS architecture used to deploy, s
 
 5. Leave the remaining values to default and click on **Request** button
 6. Repeat the same steps for your backend domain.
-7. Since this process might take from minimum 30 minutes to 48 hours, make sure you get these certificates in prior creation of Load Balancers
+7. Open the requested certificate and add the **CNAME name** and **CNAME value** in **Cloudflare** under DNS records, post which the certificate status changes to Success in few minutes
 
 ### Task-5: Create a Load Balancer (ALB)
 
@@ -692,22 +692,28 @@ The following diagram represents the complete AWS architecture used to deploy, s
 6. Under **Listeners & routing** section, set the parameters as below
 
     **Listener:**  
-           Protocol: HTTP  
-           Port: 80  
+           Protocol: HTTPS  
+           Port: 443  
     **Default action:**  
         Routing action: Forward to target groups  
             Target group: Select the target group created in previous task  
     Leave the remaining values to default
 
-    <img width="1474" height="820" alt="image" src="https://github.com/user-attachments/assets/7bee52d9-e2ef-455b-88ce-ea03dd233f59" />
+    <img width="1391" height="859" alt="image" src="https://github.com/user-attachments/assets/725e8984-c3fc-4e4b-b2c1-05300879e40b" />
 
-8. Scroll down and click on **Create load balancer**
+8. Under **Secure listener settings**  select the certificate created in ACM from **Certificate (from ACM)** dropdown
+
+    <img width="1398" height="481" alt="image" src="https://github.com/user-attachments/assets/80c9ede0-bf37-4b94-a679-7ac5156949df" />
+
+9. Scroll down and click on **Create load balancer**
 
     <img width="269" height="66" alt="image" src="https://github.com/user-attachments/assets/1c38a310-4c41-4a1c-a2fb-6c6307b635b2" />
 
-9. Wait till the Load balacer status become **Active**
+10. Wait till the Load balacer status become **Active**
 
     <img width="1710" height="939" alt="image" src="https://github.com/user-attachments/assets/8f00b9c8-d477-45ad-b153-59ac7acbcc31" />
+
+11. Repeat the steps to create another Load balancer for the backend
 
 ### Task-5: Create Auto Scaling Group (ASG)
 
